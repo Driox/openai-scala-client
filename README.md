@@ -1,7 +1,7 @@
 # OpenAI Scala Client 🤖
 [![version](https://img.shields.io/badge/version-1.3.0.RC.1-green.svg)](https://cequence.io) [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](https://opensource.org/licenses/MIT) ![GitHub Stars](https://img.shields.io/github/stars/cequence-io/openai-scala-client?style=social) [![Twitter Follow](https://img.shields.io/twitter/follow/0xbnd?style=social)](https://twitter.com/0xbnd) ![GitHub CI](https://github.com/cequence-io/openai-scala-client/actions/workflows/continuous-integration.yml/badge.svg)
 
-This is a no-nonsense async Scala client for OpenAI API supporting all the available endpoints and params **including streaming**, the newest **chat completion**, **responses API**, **assistants API**, **tools**, **vision**, and **voice routines** (as defined [here](https://platform.openai.com/docs/api-reference)), provided in a single, convenient service called [OpenAIService](./openai-core/src/main/scala/io/cequence/openaiscala/service/OpenAIService.scala). The supported calls are: 
+This is a no-nonsense async Scala client for OpenAI API supporting all the available endpoints and params **including streaming**, the newest **chat completion**, **responses API**, **assistants API**, **tools**, **vision**, and **voice routines** (as defined [here](https://platform.openai.com/docs/api-reference)), provided in a single, convenient service called [OpenAIService](./openai-core/src/main/scala/io/cequence/openaiscala/service/OpenAIService.scala). The supported calls are:
 
 * **Models**: [listModels](https://platform.openai.com/docs/api-reference/models/list), and [retrieveModel](https://platform.openai.com/docs/api-reference/models/retrieve)
 * **Completions**: [createCompletion](https://platform.openai.com/docs/api-reference/completions/create)
@@ -18,9 +18,9 @@ This is a no-nonsense async Scala client for OpenAI API supporting all the avail
 * **Threads**: [createThread](https://platform.openai.com/docs/api-reference/threads/createThread), [retrieveThread](https://platform.openai.com/docs/api-reference/threads/getThread), [modifyThread](https://platform.openai.com/docs/api-reference/threads/modifyThread), and [deleteThread](https://platform.openai.com/docs/api-reference/threads/deleteThread)
 * **Thread Messages**: [createThreadMessage](https://platform.openai.com/docs/api-reference/assistants/createAssistant), [retrieveThreadMessage](https://platform.openai.com/docs/api-reference/messages/getMessage), [modifyThreadMessage](https://platform.openai.com/docs/api-reference/messages/modifyMessage), [listThreadMessages](https://platform.openai.com/docs/api-reference/messages/listMessages), [retrieveThreadMessageFile](https://platform.openai.com/docs/api-reference/messages/getMessageFile), and [listThreadMessageFiles](https://platform.openai.com/docs/api-reference/messages/listMessageFiles)
 * **Runs**: [createRun](https://platform.openai.com/docs/api-reference/runs/createRun), [createThreadAndRun](https://platform.openai.com/docs/api-reference/runs/createThreadAndRun), [listRuns](https://platform.openai.com/docs/api-reference/runs/listRuns), [retrieveRun](https://platform.openai.com/docs/api-reference/runs/retrieveRun), [modifyRun](https://platform.openai.com/docs/api-reference/runs/modifyRun), [submitToolOutputs](https://platform.openai.com/docs/api-reference/runs/submitToolOutputs), and [cancelRun](https://platform.openai.com/docs/api-reference/runs/cancelRun)
-* **Run Steps**: [listRunSteps](https://platform.openai.com/docs/api-reference/run-steps/listRunSteps), and [retrieveRunStep](https://platform.openai.com/docs/api-reference/run-steps/getRunStep) 
+* **Run Steps**: [listRunSteps](https://platform.openai.com/docs/api-reference/run-steps/listRunSteps), and [retrieveRunStep](https://platform.openai.com/docs/api-reference/run-steps/getRunStep)
 * **Vector Stores**: [createVectorStore](https://platform.openai.com/docs/api-reference/vector-stores/create), [listVectorStores](https://platform.openai.com/docs/api-reference/vector-stores/list), [retrieveVectorStore](https://platform.openai.com/docs/api-reference/vector-stores/retrieve), [modifyVectorStore](https://platform.openai.com/docs/api-reference/vector-stores/modify), and [deleteVectorStore](https://platform.openai.com/docs/api-reference/vector-stores/delete)
-* **Vector Store Files**: [createVectorStoreFile](https://platform.openai.com/docs/api-reference/vector-stores-files/createFile), [listVectorStoreFiles](https://platform.openai.com/docs/api-reference/vector-stores-files/listFiles), [retrieveVectorStoreFile](https://platform.openai.com/docs/api-reference/vector-stores-files/getFile), and [deleteVectorStoreFile](https://platform.openai.com/docs/api-reference/vector-stores-files/deleteFile)  
+* **Vector Store Files**: [createVectorStoreFile](https://platform.openai.com/docs/api-reference/vector-stores-files/createFile), [listVectorStoreFiles](https://platform.openai.com/docs/api-reference/vector-stores-files/listFiles), [retrieveVectorStoreFile](https://platform.openai.com/docs/api-reference/vector-stores-files/getFile), and [deleteVectorStoreFile](https://platform.openai.com/docs/api-reference/vector-stores-files/deleteFile)
 * **Vector Store File Batches**: [createVectorStoreFileBatch](https://platform.openai.com/docs/api-reference/vector-stores-file-batches/createBatch), [retrieveVectorStoreFileBatch](https://platform.openai.com/docs/api-reference/vector-stores-file-batches/getBatch), [cancelVectorStoreFileBatch](https://platform.openai.com/docs/api-reference/vector-stores-file-batches/cancelBatch), and [listVectorStoreBatchFiles](https://platform.openai.com/docs/api-reference/vector-stores-file-batches/listBatchFiles)
 * **Responses** (🔥 **New**): [createModelResponse](https://platform.openai.com/docs/api-reference/responses/create), [getModelResponse](https://platform.openai.com/docs/api-reference/responses/get), [deleteModelResponse](https://platform.openai.com/docs/api-reference/responses/delete), and [listModelResponseInputItems](https://platform.openai.com/docs/api-reference/responses/input-items)
 
@@ -67,7 +67,7 @@ Also try out our [Scala client for Pinecone vector database](https://github.com/
 
 ## Installation 🚀
 
-The currently supported Scala versions are **2.12, 2.13**, and **3**.  
+The currently supported Scala versions are **2.12, 2.13**, and **3**.
 
 To install the library, add the following dependency to your *build.sbt*
 
@@ -96,7 +96,7 @@ If you want streaming support, use `"io.cequence" %% "openai-scala-client-stream
 
 **I. Obtaining OpenAIService**
 
-First you need to provide an implicit execution context as well as akka materializer, e.g., as
+First you need to provide an implicit execution context as well as pekko materializer, e.g., as
 
 ```scala
   implicit val ec = ExecutionContext.global
@@ -301,7 +301,7 @@ There is a new project [openai-scala-client-examples](./openai-examples/src/main
   )
 ```
 
-- Create chat completion 
+- Create chat completion
 
 ```scala
   val createChatCompletionSettings = CreateChatCompletionSettings(
@@ -323,7 +323,7 @@ There is a new project [openai-scala-client-examples](./openai-examples/src/main
   }
 ```
 
-- Create chat completion for functions 
+- Create chat completion for functions
 
 ```scala
   val messages = Seq(
@@ -735,14 +735,14 @@ import io.cequence.openaiscala.domain.{BaseMessage, FunctionSpec, ModelId, Syste
 class MyCompletionService extends OpenAICountTokensHelper {
   def exec = {
     val model = ModelId.gpt_4_turbo_2024_04_09
-    
+
     // messages to be sent to OpenAI
-    val messages: Seq[BaseMessage] = 
+    val messages: Seq[BaseMessage] =
      Seq(
        SystemMessage("You are a helpful assistant."),
        UserMessage("What's the weather like in San Francisco, Tokyo, and Paris?")
      )
-     
+
     // function to be called
     val function: FunctionSpec = FunctionSpec(
       name = "getWeather",
@@ -773,7 +773,7 @@ Adapters for OpenAI services (chat completion, core, or full) are provided by [O
 
 Note that the adapters can be arbitrarily combined/stacked.
 
-- **Round robin** load distribution 
+- **Round robin** load distribution
 
 ```scala
   val adapters = OpenAIServiceAdapters.forFullService
@@ -801,7 +801,7 @@ Note that the adapters can be arbitrarily combined/stacked.
   val adapters = OpenAIServiceAdapters.forFullService
 
   val rawService = OpenAIServiceFactory()
-  
+
   val service = adapters.log(
     rawService,
     "openAIService",
@@ -822,7 +822,7 @@ Note that the adapters can be arbitrarily combined/stacked.
   )
 ```
 - **Retry** on a specific function using [RetryHelpers](./openai-core/src/main/scala/io/cequence/openaiscala/RetryHelpers.scala) directly
- 
+
 ```scala
 class MyCompletionService @Inject() (
   val actorSystem: ActorSystem,
@@ -892,7 +892,7 @@ class MyCompletionService @Inject() (
 
 ## FAQ 🤔
 
-1. _Wen Scala 3?_ 
+1. _Wen Scala 3?_
 
    ~~Feb 2023. You are right; we chose the shortest month to do so :)~~
  **Done!**
@@ -900,7 +900,7 @@ class MyCompletionService @Inject() (
 
 2. _I got a timeout exception. How can I change the timeout setting?_
 
-   You can do it either by passing the `timeouts` param to `OpenAIServiceFactory` or, if you use your own configuration file, then you can simply add it there as: 
+   You can do it either by passing the `timeouts` param to `OpenAIServiceFactory` or, if you use your own configuration file, then you can simply add it there as:
 
 ```
 openai-scala-client {
@@ -930,7 +930,6 @@ This library is available and published as open source under the terms of the [M
 
 This project is open-source and welcomes any contribution or feedback ([here](https://github.com/cequence-io/openai-scala-client/issues)).
 
-Development of this library has been supported by  [<img src="https://cequence.io/favicon-16x16.png"> - Cequence.io](https://cequence.io) - `The future of contracting` 
+Development of this library has been supported by  [<img src="https://cequence.io/favicon-16x16.png"> - Cequence.io](https://cequence.io) - `The future of contracting`
 
 Created and maintained by [Peter Banda](https://peterbanda.net).
-
