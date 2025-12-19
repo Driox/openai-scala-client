@@ -1,7 +1,7 @@
 package io.cequence.openaiscala.gemini.service.impl
 
-import akka.NotUsed
-import akka.stream.scaladsl.Source
+import org.apache.pekko.NotUsed
+import org.apache.pekko.stream.scaladsl.Source
 import io.cequence.openaiscala.OpenAIScalaClientException
 import io.cequence.openaiscala.domain.BaseMessage.getTextContent
 import io.cequence.openaiscala.domain.response.{
@@ -95,7 +95,7 @@ private[service] class OpenAIGeminiChatCompletionService(
         .map(toOpenAIChunkResponse)
     )
 
-    // keep it like this because of the compatibility with older versions of Akka stream
+    // keep it like this because of the compatibility with older versions of Pekko stream
     Source.fromFutureSource(futureSource).mapMaterializedValue(_ => NotUsed)
   }
 
