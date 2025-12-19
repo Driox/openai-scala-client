@@ -29,7 +29,7 @@ object GoogleGeminiGenerateContent extends ExampleBase[GeminiService] {
       .generateContent(
         contents,
         settings = GenerateContentSettings(
-          model = NonOpenAIModelId.gemini_2_5_pro_preview_05_06,
+          model = NonOpenAIModelId.gemini_2_5_pro,
           systemInstruction = Some(systemPrompt),
           generationConfig = Some(
             GenerationConfig(

@@ -33,6 +33,15 @@ object AnthropicServiceFactory extends AnthropicServiceConsts with EnvHelper {
     val bedrockRegion = "AWS_BEDROCK_REGION"
   }
 
+  private val anthropicBetaHeaders = Seq(
+    "structured-outputs-2025-11-13",
+    "output-128k-2025-02-19",
+    "files-api-2025-04-14",
+    "code-execution-2025-08-25",
+    "mcp-client-2025-04-04",
+    "web-fetch-2025-09-10"
+  )
+
   /**
    * Create a new instance of the [[OpenAIChatCompletionService]] wrapping the AnthropicService
    *
@@ -91,10 +100,12 @@ object AnthropicServiceFactory extends AnthropicServiceConsts with EnvHelper {
     implicit ec: ExecutionContext,
     materializer: Materializer
   ): AnthropicService = {
-    val authHeaders = Seq(
+    val authHeaders = anthropicBetaHeaders.map { betaHeader =>
+      ("anthropic-beta", betaHeader)
+    } ++ Seq(
       ("x-api-key", s"$apiKey"),
-      ("anthropic-version", apiVersion),
-      ("anthropic-beta", "output-128k-2025-02-19")
+      ("anthropic-version", apiVersion)
+      // TODO: revisit these
     ) ++ (if (withPdf) Seq(("anthropic-beta", "pdfs-2024-09-25")) else Seq.empty) ++
       (if (withCache) Seq(("anthropic-beta", "prompt-caching-2024-07-31")) else Seq.empty)
 

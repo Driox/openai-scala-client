@@ -1,6 +1,6 @@
 package io.cequence.openaiscala.domain.responsesapi.tools.mcp
 
-import io.cequence.openaiscala.domain.responsesapi.Input
+import io.cequence.openaiscala.domain.responsesapi.{Input, Output}
 
 /**
  * A list of tools available on an MCP server.
@@ -17,8 +17,9 @@ import io.cequence.openaiscala.domain.responsesapi.Input
 final case class MCPListTools(
   id: String,
   serverLabel: String,
-  tools: Seq[MCPTool],
+  tools: Seq[MCPToolRef],
   error: Option[String] = None
-) extends Input {
+) extends Input
+    with Output {
   val `type`: String = "mcp_list_tools"
 }

@@ -1,6 +1,6 @@
 package io.cequence.openaiscala.domain.responsesapi.tools
 
-import io.cequence.openaiscala.domain.responsesapi.Input
+import io.cequence.openaiscala.domain.responsesapi.{Input, Output}
 
 /**
  * A call to a custom tool created by the model.
@@ -19,6 +19,8 @@ final case class CustomToolCall(
   input: String,
   name: String,
   id: Option[String] = None
-) extends Input {
+) extends ToolCall
+    with Input
+    with Output {
   val `type`: String = "custom_tool_call"
 }

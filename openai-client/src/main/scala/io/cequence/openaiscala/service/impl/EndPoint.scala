@@ -26,6 +26,7 @@ object EndPoint {
   case object vector_stores extends EndPoint
   case object runs extends EndPoint
   case object responses extends EndPoint
+  case object graders extends EndPoint("fine_tuning/alpha/graders")
 }
 
 sealed abstract class Param(value: String = "") extends NamedEnumValue(value)
@@ -88,6 +89,7 @@ object Param {
   case object style extends Param
   case object voice extends Param
   case object speed extends Param
+  case object stream_format extends Param
   case object metadata extends Param
   case object role extends Param
   case object content extends Param

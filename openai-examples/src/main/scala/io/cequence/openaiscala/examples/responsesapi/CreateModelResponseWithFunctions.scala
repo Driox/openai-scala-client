@@ -1,12 +1,11 @@
 package io.cequence.openaiscala.examples.responsesapi
 
 import scala.concurrent.Future
-import io.cequence.openaiscala.domain.responsesapi.{Inputs, CreateModelResponseSettings}
+import io.cequence.openaiscala.domain.responsesapi.{CreateModelResponseSettings, Inputs}
 import io.cequence.openaiscala.examples.Example
 import io.cequence.openaiscala.domain.ModelId
-import io.cequence.openaiscala.domain.responsesapi.tools.FunctionTool
+import io.cequence.openaiscala.domain.responsesapi.tools.{Tool, ToolChoice}
 import io.cequence.openaiscala.domain.JsonSchema
-import io.cequence.openaiscala.domain.responsesapi.tools.ToolChoice
 
 object CreateModelResponseWithFunctions extends Example {
 
@@ -15,11 +14,11 @@ object CreateModelResponseWithFunctions extends Example {
       .createModelResponse(
         Inputs.Text("What is the weather like in Boston today?"),
         settings = CreateModelResponseSettings(
-          model = ModelId.gpt_4o_2024_08_06,
+          model = ModelId.gpt_5_mini,
           tools = Seq(
-            FunctionTool(
+            Tool.function(
               name = "get_current_weather",
-              parameters = JsonSchema.Object(
+              parameters = JsonSchema.ObjectAsMap(
                 properties = Map(
                   "location" -> JsonSchema.String(
                     description = Some("The city and state, e.g. San Francisco, CA")
@@ -50,7 +49,7 @@ object CreateModelResponseWithFunctions extends Example {
              |Status: ${functionCall.status}""".stripMargin
         )
 
-        val toolsUsed = response.tools.map(_.typeString)
+        val toolsUsed = response.tools.map(_.`type`)
 
         println(s"${toolsUsed.size} tools used: ${toolsUsed.mkString(", ")}")
       }

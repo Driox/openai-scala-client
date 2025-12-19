@@ -27,7 +27,7 @@ import io.cequence.openaiscala.domain.response.ResponseFormat.{
   TextResponse
 }
 import io.cequence.openaiscala.domain.response._
-import io.cequence.openaiscala.domain.{ThreadMessageFile, _}
+import io.cequence.openaiscala.domain.{HasType, ThreadMessageFile, _}
 import io.cequence.wsclient.JsonUtil
 import io.cequence.wsclient.JsonUtil.{enumFormat, snakeEnumFormat}
 import play.api.libs.functional.syntax._
@@ -363,6 +363,8 @@ object JsonFormats {
   )
 
   implicit val reasoningEffortFormat: Format[ReasoningEffort] = enumFormat[ReasoningEffort](
+    ReasoningEffort.none,
+    ReasoningEffort.minimal,
     ReasoningEffort.low,
     ReasoningEffort.medium,
     ReasoningEffort.high
@@ -1244,24 +1246,29 @@ object JsonFormats {
           if ((json \ "enum").asOpt[Seq[String]].exists(_.isEmpty)) json - "enum" else json
 
         case c: JsonSchema.Number =>
-          Json.toJson(c).as[JsObject]
+          Json.toJsObject(c)
 
         case c: JsonSchema.Integer =>
-          Json.toJson(c).as[JsObject]
+          Json.toJsObject(c)
 
         case c: JsonSchema.Boolean =>
-          Json.toJson(c).as[JsObject]
+          Json.toJsObject(c)
 
         case _: JsonSchema.Null =>
           Json.obj()
 
         case c: JsonSchema.Object =>
-          Json.obj(
+          val baseObj = Json.obj(
             "properties" -> JsObject(
               c.properties.map { case (key, value) => (key, writesAux(value)) }
             ),
             "required" -> c.required
           )
+
+          c.additionalProperties match {
+            case Some(value) => baseObj + ("additionalProperties" -> toJson(value))
+            case None        => baseObj
+          }
 
         case c: JsonSchema.Array =>
           Json.obj(
@@ -1323,9 +1330,12 @@ object JsonFormats {
                 }
 
                 val required = (o \ "required").asOpt[Seq[String]].getOrElse(Nil)
+                val additionalProperties = (o \ "additionalProperties").asOpt[Boolean]
 
                 if (propertiesErrors.isEmpty)
-                  JsSuccess(JsonSchema.Object(properties, required))
+                  JsSuccess(
+                    JsonSchema.ObjectAsMap(properties, required, additionalProperties)
+                  )
                 else
                   JsError(propertiesErrors.reduce(_ ++ _))
               }
@@ -1384,4 +1394,18 @@ object JsonFormats {
     Format(eitherJsonSchemaReads, eitherJsonSchemaWrites)
 
   implicit val jsonSchemaDefFormat: Format[JsonSchemaDef] = Json.format[JsonSchemaDef]
+
+  /**
+   * Wraps an OFormat with type field handling for classes extending HasType. Automatically
+   * adds the `type` field during serialization and validates it during deserialization.
+   *
+   * @param format
+   *   The underlying OFormat to wrap
+   * @tparam T
+   *   The type extending HasType
+   * @return
+   *   A Format that handles type field serialization and validation
+   */
+  def formatWithType[T <: HasType](format: OFormat[T]): OFormat[T] =
+    TypeJsonWrapper(format)
 }

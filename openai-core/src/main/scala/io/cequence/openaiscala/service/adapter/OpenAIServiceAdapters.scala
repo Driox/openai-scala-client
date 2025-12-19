@@ -57,14 +57,16 @@ trait OpenAIServiceAdapters[S <: CloseableService] extends ServiceAdapters[S] {
     )
 
   def chatCompletionIntercept(
-    intercept: ChatCompletionInterceptData => Future[Unit]
+    intercept: ChatCompletionInterceptData => Future[Unit],
+    adjustSettingsForCall: CreateChatCompletionSettings => CreateChatCompletionSettings =
+      identity[CreateChatCompletionSettings]
   )(
     service: S with OpenAIChatCompletionService
   )(
     implicit ec: ExecutionContext
   ): S =
     wrapAndDelegateChatCompletion(
-      new ChatCompletionInterceptAdapter(intercept)(service)
+      new ChatCompletionInterceptAdapter(intercept, adjustSettingsForCall)(service)
     )
 
   def chatCompletionRouter(

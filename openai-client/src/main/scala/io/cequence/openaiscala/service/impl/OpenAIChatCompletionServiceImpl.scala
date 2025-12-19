@@ -9,6 +9,7 @@ import io.cequence.openaiscala.service.adapter.{
   MessageConversions
 }
 import io.cequence.openaiscala.service.{OpenAIChatCompletionService, OpenAIServiceConsts}
+import io.cequence.openaiscala.service.OpenAIChatCompletionExtra.toStrictSchema
 import io.cequence.wsclient.JsonUtil
 import io.cequence.wsclient.ResponseImplicits._
 import io.cequence.wsclient.service.WSClientWithEngineTypes.WSClientWithEngine
@@ -24,12 +25,8 @@ import scala.concurrent.Future
  */
 private[service] trait OpenAIChatCompletionServiceImpl
     extends OpenAIChatCompletionService
-    with WSClientWithEngine
-    with ChatCompletionBodyMaker
-    with OpenAIServiceConsts {
-
-  override protected type PEP = EndPoint
-  override protected type PT = Param
+    with OpenAIServiceWSBase
+    with ChatCompletionBodyMaker {
 
   override def createChatCompletion(
     messages: Seq[BaseMessage],
@@ -75,7 +72,18 @@ trait ChatCompletionBodyMaker {
     ModelId.o4_mini_2025_04_16
   )
 
+  private val gpt5_1And2Models = Seq(
+    ModelId.gpt_5_2,
+    ModelId.gpt_5_2_2025_12_11,
+    ModelId.gpt_5_2_pro,
+    ModelId.gpt_5_2_pro_2025_12_11,
+    ModelId.gpt_5_1,
+    ModelId.gpt_5_1_2025_11_13
+  )
+
   private val gpt5Models = Set(
+    ModelId.gpt_5_pro,
+    ModelId.gpt_5_pro_2025_10_06,
     ModelId.gpt_5,
     ModelId.gpt_5_2025_08_07,
     ModelId.gpt_5_mini,
@@ -109,6 +117,8 @@ trait ChatCompletionBodyMaker {
         ChatCompletionSettingsConversions.o(settings)
       else if (gpt5Models.contains(settings.model))
         ChatCompletionSettingsConversions.gpt5(settings)
+      else if (gpt5_1And2Models.contains(settings.model))
+        ChatCompletionSettingsConversions.gpt5_1And2(settings)
       else
         settings
 

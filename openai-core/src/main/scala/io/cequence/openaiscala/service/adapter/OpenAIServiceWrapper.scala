@@ -4,6 +4,7 @@ import akka.stream.scaladsl.Source
 import akka.util.ByteString
 import io.cequence.openaiscala.domain.Batch._
 import io.cequence.openaiscala.domain._
+import io.cequence.openaiscala.domain.graders.Grader
 import io.cequence.openaiscala.domain.response._
 import io.cequence.openaiscala.domain.settings._
 import io.cequence.openaiscala.service.adapter.ServiceWrapperTypes._
@@ -14,8 +15,16 @@ import io.cequence.openaiscala.service.{
 }
 import io.cequence.wsclient.service.adapter.DelegatedCloseableServiceWrapper
 import io.cequence.wsclient.service.adapter.ServiceWrapperTypes.CloseableServiceWrapper
-import io.cequence.openaiscala.domain.responsesapi.{Inputs, Response, InputItemsResponse}
-import io.cequence.openaiscala.domain.responsesapi.CreateModelResponseSettings
+import io.cequence.openaiscala.domain.responsesapi.{
+  InputItemsResponse,
+  InputTokensCount,
+  Inputs,
+  Response
+}
+import io.cequence.openaiscala.domain.responsesapi.{
+  CreateModelResponseSettings,
+  GetInputTokensCountSettings
+}
 import io.cequence.openaiscala.domain.responsesapi.{
   DeleteResponse => ResponsesAPIDeleteResponse
 }
@@ -594,6 +603,10 @@ trait OpenAIServiceWrapper
   ): Future[Seq[Batch]] =
     wrap(_.listBatches(pagination, order))
 
+  ///////////////////
+  // Responses API //
+  ///////////////////
+
   override def createModelResponse(
     inputs: Inputs,
     settings: CreateModelResponseSettings
@@ -614,6 +627,19 @@ trait OpenAIServiceWrapper
     _.deleteModelResponse(responseId)
   )
 
+  override def cancelModelResponse(
+    responseId: String
+  ): Future[Response] = wrap(
+    _.cancelModelResponse(responseId)
+  )
+
+  override def getModelResponseInputTokenCounts(
+    inputs: Inputs,
+    settings: GetInputTokensCountSettings
+  ): Future[InputTokensCount] = wrap(
+    _.getModelResponseInputTokenCounts(inputs, settings)
+  )
+
   override def listModelResponseInputItems(
     responseId: String,
     after: Option[String],
@@ -623,6 +649,22 @@ trait OpenAIServiceWrapper
     order: Option[SortOrder]
   ): Future[InputItemsResponse] = wrap(
     _.listModelResponseInputItems(responseId, after, before, include, limit, order)
+  )
+
+  /////////////
+  // Graders //
+  /////////////
+
+  override def runGrader(
+    grader: Grader,
+    modelSample: String,
+    item: Map[String, Any]
+  ): Future[String] = wrap(
+    _.runGrader(grader, modelSample, item)
+  )
+
+  override def validateGrader(grader: Grader): Future[Grader] = wrap(
+    _.validateGrader(grader)
   )
 }
 

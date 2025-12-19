@@ -20,9 +20,7 @@ case class FileSearchTool(
   maxNumResults: Option[Int] = None,
   rankingOptions: Option[FileSearchRankingOptions] = None
 ) extends Tool {
-  val `type`: String = "file_search"
-
-  override def typeString: String = `type`
+  override val `type`: String = "file_search"
 }
 
 sealed trait FileFilter
@@ -36,11 +34,11 @@ object FileFilter {
    * @param key
    *   The key to compare against the value.
    * @param operator
-   *   Specifies the comparison operator: Equals, NotEqual, GreaterThan, GreaterThanOrEqual,
-   *   LessThan, LessThanOrEqual
+   *   Specifies the comparison operator: eq (equals), ne (not equal), gt (greater than), gte
+   *   (greater than or equal), lt (less than), lte (less than or equal), in, nin (not in)
    * @param value
-   *   The value to compare against the attribute key; supports string, number, or boolean
-   *   types.
+   *   The value to compare against the attribute key; supports string, number, boolean, or
+   *   array types.
    */
   case class ComparisonFilter(
     key: String,
@@ -62,6 +60,8 @@ object FileFilter {
     case object Gte extends ComparisonOperator
     case object Lt extends ComparisonOperator
     case object Lte extends ComparisonOperator
+    case object In extends ComparisonOperator
+    case object Nin extends ComparisonOperator
 
     def values = Seq(
       Eq,
@@ -69,7 +69,9 @@ object FileFilter {
       Gt,
       Gte,
       Lt,
-      Lte
+      Lte,
+      In,
+      Nin
     )
   }
 
