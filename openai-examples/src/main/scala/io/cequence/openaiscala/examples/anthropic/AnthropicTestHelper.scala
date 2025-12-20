@@ -1,7 +1,7 @@
 package io.cequence.openaiscala.examples.anthropic
 
 import org.apache.pekko.actor.Scheduler
-import org.apache.pekko.ActorSystem
+import org.apache.pekko.actor.ActorSystem
 import io.cequence.openaiscala.OpenAIScalaClientTimeoutException
 import io.cequence.openaiscala.RetryHelpers.RetrySettings
 import io.cequence.openaiscala.anthropic.service.AnthropicServiceFactory

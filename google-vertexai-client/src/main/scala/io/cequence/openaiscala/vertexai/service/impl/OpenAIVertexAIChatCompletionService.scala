@@ -20,7 +20,8 @@ import io.cequence.openaiscala.service.{
 
 import java.util.concurrent.CompletableFuture
 import scala.collection.convert.ImplicitConversions.`seq AsJavaList`
-import scala.compat.java8.FutureConverters._
+import scala.jdk.FutureConverters._
+
 import scala.concurrent.{ExecutionContext, Future}
 
 // TODO: convert Google exceptions
@@ -46,7 +47,7 @@ private[service] class OpenAIVertexAIChatCompletionService(
       )
     )
     val scalaFuture: Future[GenerateContentResponse] =
-      toScala(CompletableFuture.supplyAsync(() => javaFuture.get))
+      CompletableFuture.supplyAsync(() => javaFuture.get).asScala
 
     scalaFuture.map { response =>
       toOpenAI(response, settings.model)
