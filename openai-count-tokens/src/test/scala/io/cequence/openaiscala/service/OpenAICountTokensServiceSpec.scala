@@ -577,5 +577,5 @@ class OpenAICountTokensServiceSpec
     }
   }
 
-  private def chat(messages: BaseMessage*): Seq[BaseMessage] = Seq(messages: _*)
+  private def chat(messages: BaseMessage*): Seq[BaseMessage] = Seq(messages*)
 }

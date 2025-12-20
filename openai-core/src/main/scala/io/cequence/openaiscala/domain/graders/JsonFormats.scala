@@ -9,14 +9,14 @@ object JsonFormats {
   private implicit val config: JsonConfiguration = JsonConfiguration(JsonNaming.SnakeCase)
 
   implicit lazy val stringCheckOperationFormat: Format[StringCheckOperation] =
-    enumFormat[StringCheckOperation](StringCheckOperation.values: _*)
+    enumFormat[StringCheckOperation](StringCheckOperation.values *)
 
   implicit lazy val stringGraderFormat: OFormat[StringGrader] =
     Json.format[StringGrader]
 
   implicit lazy val textSimilarityEvaluationMetricFormat
     : Format[TextSimilarityEvaluationMetric] =
-    enumFormat[TextSimilarityEvaluationMetric](TextSimilarityEvaluationMetric.values: _*)
+    enumFormat[TextSimilarityEvaluationMetric](TextSimilarityEvaluationMetric.values *)
 
   implicit lazy val textSimilarityGraderFormat: OFormat[TextSimilarityGrader] =
     Json.format[TextSimilarityGrader]
@@ -92,7 +92,7 @@ object JsonFormats {
 
   // GraderInputContent formats
   implicit lazy val imageDetailFormat: Format[ImageDetail] =
-    enumFormat[ImageDetail](ImageDetail.values: _*)
+    enumFormat[ImageDetail](ImageDetail.values *)
 
   implicit lazy val audioInputFormat: OFormat[AudioInput] =
     Json.format[AudioInput]

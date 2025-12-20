@@ -78,7 +78,7 @@ trait OpenAICountTokensHelper {
       case m: UserMessage      => count(m.content)
       case m: UserSeqMessage =>
         val contents = m.content.map(Json.toJson(_)(JsonFormats.contentWrites).toString())
-        count(contents: _*)
+        count(contents*)
 
       case m: AssistantMessage => count(m.content)
 

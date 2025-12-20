@@ -81,7 +81,7 @@ object CreateModelResponseWithMCPTool extends Example {
           // Submit approval responses by continuing the conversation
           // IMPORTANT: Set previousResponseId to link the approval responses to the original request
           service.createModelResponse(
-            Inputs.Items(approvalResponses: _*),
+            Inputs.Items(approvalResponses *),
             settings = CreateModelResponseSettings(
               model = model,
               previousResponseId =

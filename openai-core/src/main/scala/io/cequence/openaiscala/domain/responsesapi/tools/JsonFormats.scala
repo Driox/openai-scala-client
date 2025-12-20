@@ -29,10 +29,10 @@ object JsonFormats {
 
   // file search tool
   implicit lazy val fileFilterComparisonOperatorFormat: Format[FileFilter.ComparisonOperator] =
-    enumFormat[FileFilter.ComparisonOperator](FileFilter.ComparisonOperator.values: _*)
+    enumFormat[FileFilter.ComparisonOperator](FileFilter.ComparisonOperator.values *)
 
   implicit lazy val fileFilterCompoundOperatorFormat: Format[FileFilter.CompoundOperator] =
-    enumFormat[FileFilter.CompoundOperator](FileFilter.CompoundOperator.values: _*)
+    enumFormat[FileFilter.CompoundOperator](FileFilter.CompoundOperator.values *)
 
   implicit lazy val fileFilterComparisonFilterFormat: Format[FileFilter.ComparisonFilter] = {
     implicit val anyFormat: Format[Any] = new Format[Any] {
@@ -115,7 +115,7 @@ object JsonFormats {
 
   // web search tool
   implicit lazy val webSearchTypeFormat: Format[WebSearchType] =
-    enumFormat[WebSearchType](WebSearchType.values: _*)
+    enumFormat[WebSearchType](WebSearchType.values *)
 
   implicit lazy val webSearchFiltersFormat: Format[WebSearchFilters] =
     Json.format[WebSearchFilters]
@@ -135,7 +135,7 @@ object JsonFormats {
     Json.format[MCPToolFilter]
 
   implicit lazy val mcpRequireApprovalSettingFormat: Format[MCPRequireApproval.Setting] =
-    enumFormat[MCPRequireApproval.Setting](MCPRequireApproval.Setting.values: _*)
+    enumFormat[MCPRequireApproval.Setting](MCPRequireApproval.Setting.values *)
 
   private implicit lazy val mcpRequireApprovalFilterFormat: Format[MCPRequireApproval.Filter] =
     Json.format[MCPRequireApproval.Filter]
@@ -315,14 +315,14 @@ object JsonFormats {
   //////////////////
 
   implicit lazy val toolChoiceModeFormat: Format[ToolChoice.Mode] = {
-    enumFormat[ToolChoice.Mode](ToolChoice.Mode.values: _*)
+    enumFormat[ToolChoice.Mode](ToolChoice.Mode.values *)
   }
 
   private implicit lazy val toolChoiceAllowedToolsFormat: OFormat[ToolChoice.AllowedTools] =
     Json.format[ToolChoice.AllowedTools]
 
   implicit lazy val hostedToolTypeFormat: Format[ToolChoice.HostedToolType] =
-    enumFormat[ToolChoice.HostedToolType](ToolChoice.HostedToolType.values: _*)
+    enumFormat[ToolChoice.HostedToolType](ToolChoice.HostedToolType.values *)
 
   private implicit lazy val hostedToolFormat: OFormat[ToolChoice.HostedTool] =
     Json.format[ToolChoice.HostedTool]
@@ -391,7 +391,7 @@ object JsonFormats {
   ////////////////
 
   implicit lazy val buttonClickFormat: Format[ButtonClick] =
-    enumFormat[ButtonClick](ButtonClick.values: _*)
+    enumFormat[ButtonClick](ButtonClick.values *)
 
   implicit lazy val coordinateFormat: Format[Coordinate] = Json.format[Coordinate]
 

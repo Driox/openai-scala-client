@@ -94,11 +94,11 @@ object JsonFormats extends JsonFormats
 trait JsonFormats {
 
   implicit lazy val chatRoleFormat: Format[ChatRole] =
-    JsonUtil.enumFormat[ChatRole](ChatRole.allValues: _*)
+    JsonUtil.enumFormat[ChatRole](ChatRole.allValues*)
   implicit lazy val usageInfoFormat: Format[UsageInfo] = Json.format[UsageInfo]
 
   implicit lazy val cacheTTLFormat: Format[CacheTTL] =
-    JsonUtil.enumFormat[CacheTTL](CacheTTL.values: _*)
+    JsonUtil.enumFormat[CacheTTL](CacheTTL.values*)
 
   // Helper to write cache control object (without wrapper)
   def writeCacheControlObject(cacheControl: CacheControl): JsObject = cacheControl match {
@@ -214,19 +214,19 @@ trait JsonFormats {
   private val toolUseBlockFormat: OFormat[ToolUseBlock] = Json.format[ToolUseBlock]
 
   implicit lazy val serverToolNameFormat: Format[ServerToolName] =
-    JsonUtil.enumFormat[ServerToolName](ServerToolName.values: _*)
+    JsonUtil.enumFormat[ServerToolName](ServerToolName.values*)
 
   private val serverToolUseBlockFormat: OFormat[ServerToolUseBlock] =
     Json.format[ServerToolUseBlock]
 
   implicit lazy val webSearchErrorCodeFormat: Format[WebSearchErrorCode] =
-    JsonUtil.enumFormat[WebSearchErrorCode](WebSearchErrorCode.values: _*)
+    JsonUtil.enumFormat[WebSearchErrorCode](WebSearchErrorCode.values*)
 
   implicit lazy val codeExecutionErrorCodeFormat: Format[CodeExecutionErrorCode] =
-    JsonUtil.enumFormat[CodeExecutionErrorCode](CodeExecutionErrorCode.values: _*)
+    JsonUtil.enumFormat[CodeExecutionErrorCode](CodeExecutionErrorCode.values*)
 
   implicit lazy val bashCodeExecutionErrorCodeFormat: Format[BashCodeExecutionErrorCode] =
-    JsonUtil.enumFormat[BashCodeExecutionErrorCode](BashCodeExecutionErrorCode.values: _*)
+    JsonUtil.enumFormat[BashCodeExecutionErrorCode](BashCodeExecutionErrorCode.values*)
 
   private implicit val webSearchToolResultBlockContentFormat
     : Format[WebSearchToolResultContent.Item] = {
@@ -274,7 +274,7 @@ trait JsonFormats {
   implicit lazy val webFetchErrorCodeFormat
     : Format[WebFetchToolResultContent.WebFetchErrorCode] =
     JsonUtil.enumFormat[WebFetchToolResultContent.WebFetchErrorCode](
-      WebFetchToolResultContent.WebFetchErrorCode.values: _*
+      WebFetchToolResultContent.WebFetchErrorCode.values*
     )
 
   private implicit val webFetchSourceFormat: OFormat[WebFetchToolResultContent.Source] = {
@@ -483,12 +483,12 @@ trait JsonFormats {
     : Format[TextEditorCodeExecutionToolResultContent.TextEditorCodeExecutionErrorCode] =
     JsonUtil
       .enumFormat[TextEditorCodeExecutionToolResultContent.TextEditorCodeExecutionErrorCode](
-        TextEditorCodeExecutionToolResultContent.TextEditorCodeExecutionErrorCode.values: _*
+        TextEditorCodeExecutionToolResultContent.TextEditorCodeExecutionErrorCode.values*
       )
 
   implicit lazy val fileTypeFormat: Format[TextEditorCodeExecutionToolResultContent.FileType] =
     JsonUtil.enumFormat[TextEditorCodeExecutionToolResultContent.FileType](
-      TextEditorCodeExecutionToolResultContent.FileType.values: _*
+      TextEditorCodeExecutionToolResultContent.FileType.values*
     )
 
   private implicit val textEditorCodeExecutionToolErrorFormat
@@ -893,13 +893,13 @@ trait JsonFormats {
     Json.reads[ContentBlockDelta]
 
   implicit lazy val thinkingTypeFormat: Format[ThinkingType] =
-    JsonUtil.enumFormat[ThinkingType](ThinkingType.values: _*)
+    JsonUtil.enumFormat[ThinkingType](ThinkingType.values*)
   implicit lazy val thinkingSettingsFormat: Format[ThinkingSettings] =
     Json.format[ThinkingSettings]
 
   // Skills API formats
   implicit lazy val skillSourceFormat: Format[SkillSource] =
-    JsonUtil.enumFormat[SkillSource](SkillSource.values: _*)
+    JsonUtil.enumFormat[SkillSource](SkillSource.values*)
 
   implicit lazy val skillFormat: Format[Skill] = {
     implicit val config: JsonConfiguration = JsonConfiguration(SnakeCase)
@@ -954,16 +954,16 @@ trait JsonFormats {
 
   // Tool formats
   implicit lazy val bashToolTypeFormat: Format[BashToolType] =
-    JsonUtil.enumFormat[BashToolType](BashToolType.values: _*)
+    JsonUtil.enumFormat[BashToolType](BashToolType.values*)
 
   implicit lazy val codeExecutionToolTypeFormat: Format[CodeExecutionToolType] =
-    JsonUtil.enumFormat[CodeExecutionToolType](CodeExecutionToolType.values: _*)
+    JsonUtil.enumFormat[CodeExecutionToolType](CodeExecutionToolType.values*)
 
   implicit lazy val computerUseToolTypeFormat: Format[ComputerUseToolType] =
-    JsonUtil.enumFormat[ComputerUseToolType](ComputerUseToolType.values: _*)
+    JsonUtil.enumFormat[ComputerUseToolType](ComputerUseToolType.values*)
 
   implicit lazy val textEditorToolTypeFormat: Format[TextEditorToolType] =
-    JsonUtil.enumFormat[TextEditorToolType](TextEditorToolType.values: _*)
+    JsonUtil.enumFormat[TextEditorToolType](TextEditorToolType.values*)
 
   implicit lazy val userLocationFormat: Format[UserLocation] = Json.format[UserLocation]
 

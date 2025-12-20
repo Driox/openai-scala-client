@@ -49,11 +49,11 @@ object JsonFormats {
 
   // model status
   implicit lazy val modelStatusFormat: Format[ModelStatus] =
-    snakeEnumFormat[ModelStatus](ModelStatus.values: _*)
+    snakeEnumFormat[ModelStatus](ModelStatus.values *)
 
   // truncation strategy
   implicit lazy val truncationStrategyFormat: Format[TruncationStrategy] =
-    enumFormat[TruncationStrategy](TruncationStrategy.values: _*)
+    enumFormat[TruncationStrategy](TruncationStrategy.values *)
 
   // response format
   private implicit lazy val responseFormatJsonSchemaSpecFormat
@@ -348,7 +348,7 @@ object JsonFormats {
         JsError(errors.flatten)
       } else {
         val inputs = inputResults.collect { case JsSuccess(input, _) => input }
-        JsSuccess(Inputs.Items(inputs.toSeq: _*))
+        JsSuccess(Inputs.Items(inputs.toSeq *))
       }
     case _ => JsError("Expected string or array for Inputs")
   }

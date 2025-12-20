@@ -21,7 +21,7 @@ trait JsonFormats {
   private val logger: Logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   // Content and Parts
-  implicit val chatRoleFormat: Format[ChatRole] = enumFormat(ChatRole.values: _*)
+  implicit val chatRoleFormat: Format[ChatRole] = enumFormat(ChatRole.values*)
 
   private implicit val textPartFormat: Format[Part.Text] = Json.format[Part.Text]
   private implicit val inlineDataPartFormat: Format[Part.InlineData] =
@@ -112,10 +112,10 @@ trait JsonFormats {
   implicit val contentFormat: Format[Content] = Format(contentReads, contentWrites)
 
   // Tools
-  implicit val toolPrefixFormat: Format[ToolPrefix] = enumFormat(ToolPrefix.values: _*)
+  implicit val toolPrefixFormat: Format[ToolPrefix] = enumFormat(ToolPrefix.values*)
   implicit val dynamicRetrievalPredictorModeFormat: Format[DynamicRetrievalPredictorMode] =
-    enumFormat(DynamicRetrievalPredictorMode.values: _*)
-  implicit val schemaTypeFormat: Format[SchemaType] = enumFormat(SchemaType.values: _*)
+    enumFormat(DynamicRetrievalPredictorMode.values*)
+  implicit val schemaTypeFormat: Format[SchemaType] = enumFormat(SchemaType.values*)
 
   implicit val dynamicRetrievalConfigFormat: Format[DynamicRetrievalConfig] =
     Json.format[DynamicRetrievalConfig]
@@ -159,7 +159,7 @@ trait JsonFormats {
   implicit val toolFormat: Format[Tool] = Format(toolReads, toolWrites)
 
   implicit val functionCallingModeFormat: Format[FunctionCallingMode] = enumFormat(
-    FunctionCallingMode.values: _*
+    FunctionCallingMode.values*
   )
 
   private implicit val functionCallingConfigFormat: Format[FunctionCallingConfig] =
@@ -187,13 +187,13 @@ trait JsonFormats {
 
   // Safety
   implicit lazy val harmCategoryFormat: Format[HarmCategory] = enumFormat(
-    HarmCategory.values: _*
+    HarmCategory.values*
   )
   implicit lazy val harmBlockThresholdFormat: Format[HarmBlockThreshold] = enumFormat(
-    HarmBlockThreshold.values: _*
+    HarmBlockThreshold.values*
   )
   implicit lazy val harmProbabilityFormat: Format[HarmProbability] = enumFormat(
-    HarmProbability.values: _*
+    HarmProbability.values*
   )
 
   implicit lazy val safetySettingFormat: Format[SafetySetting] = (
@@ -235,9 +235,9 @@ trait JsonFormats {
   implicit val speechConfigFormat: Format[SpeechConfig] =
     Format(speechConfigReads, speechConfigWrites)
 
-  implicit val modalityFormat: Format[Modality] = enumFormat(Modality.values: _*)
+  implicit val modalityFormat: Format[Modality] = enumFormat(Modality.values*)
   implicit val thinkingLevelFormat: Format[ThinkingLevel] = enumFormat(
-    ThinkingLevel.values: _*
+    ThinkingLevel.values*
   )
   implicit val thinkingConfigFormat: Format[ThinkingConfig] = Json.format[ThinkingConfig]
   implicit val generationConfigFormat: Format[GenerationConfig] = Json.format[GenerationConfig]
@@ -299,8 +299,8 @@ trait JsonFormats {
     Json.format[GroundingAttribution]
 
   // Candidate and Generate Content Response
-  implicit val finishReasonFormat: Format[FinishReason] = enumFormat(FinishReason.values: _*)
-  implicit val blockReasonFormat: Format[BlockReason] = enumFormat(BlockReason.values: _*)
+  implicit val finishReasonFormat: Format[FinishReason] = enumFormat(FinishReason.values*)
+  implicit val blockReasonFormat: Format[BlockReason] = enumFormat(BlockReason.values*)
   implicit val safetyRatingFormat: Format[SafetyRating] = Json.format[SafetyRating]
   implicit val citationSourceFormat: Format[CitationSource] = Json.format[CitationSource]
   implicit val citationMetadataFormat: Format[CitationMetadata] =

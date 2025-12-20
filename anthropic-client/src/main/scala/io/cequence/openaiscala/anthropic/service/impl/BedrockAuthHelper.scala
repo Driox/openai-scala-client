@@ -32,7 +32,7 @@ trait BedrockAuthHelper {
         .withZone(java.time.ZoneOffset.UTC)
         .format(now)
 
-    val newHeaders = mutable.Map(headers.toSeq: _*)
+    val newHeaders = mutable.Map(headers.toSeq*)
 
     // Add required headers
     newHeaders += ("X-Amz-Date" -> amzdate)

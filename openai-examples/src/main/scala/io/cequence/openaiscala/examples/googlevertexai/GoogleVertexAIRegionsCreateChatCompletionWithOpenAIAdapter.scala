@@ -74,7 +74,7 @@ object GoogleVertexAIRegionsCreateChatCompletionWithOpenAIAdapter
         )(
           VertexAIServiceFactory.asOpenAI(location = location)
         )
-      }: _*
+      } *
     )
 
   override protected def run: Future[?] =

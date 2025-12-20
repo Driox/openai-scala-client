@@ -149,7 +149,7 @@ class RetryHelpersSpec
     Promise[Int]().future
     val mockRetryable = mock[Retryable]
     when(mockRetryable.attempt())
-      .thenReturn(results.head, results.takeRight(results.length - 1): _*)
+      .thenReturn(results.head, results.takeRight(results.length - 1)*)
 
     val result = retry(
       () => mockRetryable.attempt(),
