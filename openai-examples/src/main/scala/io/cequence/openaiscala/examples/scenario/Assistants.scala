@@ -18,7 +18,7 @@ object Assistants extends Example {
     new File(resource.getFile)
   }
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     for {
       fileInfo <- service.uploadFile(
         scheduleFile(),

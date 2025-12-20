@@ -21,7 +21,7 @@ object GrokCreateChatCompletionStreamed
 
   private val modelId = NonOpenAIModelId.grok_3_beta
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

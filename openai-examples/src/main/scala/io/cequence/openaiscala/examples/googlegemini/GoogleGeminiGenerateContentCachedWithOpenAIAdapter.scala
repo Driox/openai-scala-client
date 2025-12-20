@@ -37,7 +37,7 @@ object GoogleGeminiGenerateContentCachedWithOpenAIAdapter
 
   private val systemMessage = SystemMessage(systemPrompt + "\n" + knowledgeContent)
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       response <- service.createChatCompletion(
         messages = Seq(

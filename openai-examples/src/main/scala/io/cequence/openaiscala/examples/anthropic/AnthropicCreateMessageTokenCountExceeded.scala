@@ -21,7 +21,7 @@ object AnthropicCreateMessageTokenCountExceeded extends ExampleBase[AnthropicSer
   )
 
   // should throw AnthropicScalaTokenCountExceededException
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createMessage(
         messages,

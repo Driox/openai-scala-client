@@ -9,7 +9,7 @@ object CreateChatCompletionWithLogprobsWithSpecialChars extends Example {
 
   val messages = Seq(UserMessage("Just return the string °C and nothing else"))
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

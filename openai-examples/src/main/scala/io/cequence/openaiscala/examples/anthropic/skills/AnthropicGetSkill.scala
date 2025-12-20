@@ -12,7 +12,7 @@ object AnthropicGetSkill extends ExampleBase[AnthropicService] {
 
   private val skillId = "docx"
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     service
       .getSkill(skillId)
       .map { skill =>

@@ -23,7 +23,7 @@ object SonarCreateChatCompletionStreamed extends ExampleBase[SonarService] {
 
   private val modelId = NonOpenAIModelId.sonar
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

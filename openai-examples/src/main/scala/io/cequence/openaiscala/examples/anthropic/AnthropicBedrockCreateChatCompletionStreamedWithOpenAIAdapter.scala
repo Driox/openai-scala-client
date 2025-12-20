@@ -19,7 +19,7 @@ object AnthropicBedrockCreateChatCompletionStreamedWithOpenAIAdapter
     SystemMessage("You are a helpful assistant."),
     UserMessage("What is the weather like in Norway?")
   )
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     service
       .createChatCompletionStreamed(
         messages = messages,

@@ -22,7 +22,7 @@ object MistralCreateChatCompletionStreamed
 
   private val modelId = NonOpenAIModelId.mistral_large_latest
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

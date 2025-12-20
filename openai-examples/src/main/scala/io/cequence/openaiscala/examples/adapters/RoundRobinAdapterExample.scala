@@ -32,7 +32,7 @@ object RoundRobinAdapterExample extends ExampleBase[OpenAIService] {
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       // runs on the first service
       _ <- runChatCompletionAux(ModelId.gpt_4o)

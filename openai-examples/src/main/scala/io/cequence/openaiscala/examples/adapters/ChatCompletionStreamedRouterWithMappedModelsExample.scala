@@ -65,7 +65,7 @@ object ChatCompletionStreamedRouterWithMappedModelsExample
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       // runs on OctoML
       _ <- runChatCompletionAux("octoML-" + NonOpenAIModelId.llama_2_13b_chat)

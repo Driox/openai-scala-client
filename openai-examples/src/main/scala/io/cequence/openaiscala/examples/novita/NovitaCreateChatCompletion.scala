@@ -26,7 +26,7 @@ object NovitaCreateChatCompletion extends ExampleBase[OpenAIChatCompletionServic
 
   private val modelId = NonOpenAIModelId.novita_deepseek_r1_distill_llama_70b
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

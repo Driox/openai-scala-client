@@ -44,7 +44,7 @@ object AnthropicCreateChatCompletionWithReasoningEffort
     )
   )
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     // Example with no reasoning effort (extended thinking disabled)
     println("=== Example 1: No Reasoning Effort (Baseline) ===")
     for {

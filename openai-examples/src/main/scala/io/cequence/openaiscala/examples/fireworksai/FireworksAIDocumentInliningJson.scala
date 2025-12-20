@@ -45,7 +45,7 @@ object FireworksAIDocumentInliningJson extends ExampleBase[OpenAIChatCompletionS
     required = Seq("professional_associations", "accomplishment")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages,

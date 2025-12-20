@@ -23,7 +23,7 @@ object GoogleGeminiCreateChatCompletionWithOpenAIAdapter
 
   private val modelId = NonOpenAIModelId.gemini_1_5_flash_001
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

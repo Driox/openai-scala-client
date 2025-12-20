@@ -22,7 +22,7 @@ object OctoMLCreateChatCompletionStreamed
 
   private val modelId = NonOpenAIModelId.meta_llama_3_1_405b_instruct
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

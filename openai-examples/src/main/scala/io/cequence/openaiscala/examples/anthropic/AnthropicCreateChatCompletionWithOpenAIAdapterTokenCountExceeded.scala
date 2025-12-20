@@ -19,7 +19,7 @@ object AnthropicCreateChatCompletionWithOpenAIAdapterTokenCountExceeded
   )
 
   // should throw OpenAIScalaTokenCountExceededException
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

@@ -39,7 +39,7 @@ object FireworksAICreateChatCompletionWithDeepseek
 
   private val modelId = NonOpenAIModelId.deepseek_r1 // llama_v3p1_405b_instruct
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

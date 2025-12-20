@@ -12,7 +12,7 @@ object AnthropicCreateSkill extends ExampleBase[AnthropicService] {
 
   override protected val service: AnthropicService = AnthropicServiceFactory()
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     // Create a temporary directory with skill files
     val tempDir = Files.createTempDirectory("example-skill").toFile
     tempDir.deleteOnExit()

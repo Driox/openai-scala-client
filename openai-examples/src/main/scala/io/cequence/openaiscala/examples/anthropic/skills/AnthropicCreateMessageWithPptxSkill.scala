@@ -27,7 +27,7 @@ object AnthropicCreateMessageWithPptxSkill extends ExampleBase[AnthropicService]
 
   private val model = NonOpenAIModelId.claude_sonnet_4_5_20250929
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     // Using Anthropic's built-in pptx skill to create a presentation
     val messages = Seq(
       UserMessage(

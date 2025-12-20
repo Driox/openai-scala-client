@@ -49,7 +49,7 @@ object CreateRunWithFunctionCall extends Example {
       _ = println(thread)
     } yield thread
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistant <- createAssistant()
       assistantId = assistant.id

@@ -43,7 +43,7 @@ object CerebrasCreateChatCompletionJSON extends ExampleBase[OpenAIChatCompletion
 
   private val modelId = NonOpenAIModelId.cerebras_llama_4_scout_17b_16e_instruct
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionWithJSON[JsObject](
         messages = messages,

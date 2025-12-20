@@ -6,7 +6,7 @@ import scala.concurrent.Future
 
 object ListAssistants extends Example {
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistants <- service.listAssistants(Pagination.limit(100))
     } yield {

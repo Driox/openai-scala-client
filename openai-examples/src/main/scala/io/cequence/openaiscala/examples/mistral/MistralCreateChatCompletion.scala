@@ -19,7 +19,7 @@ object MistralCreateChatCompletion extends ExampleBase[OpenAIChatCompletionServi
 
   private val modelId = NonOpenAIModelId.open_mistral_nemo
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

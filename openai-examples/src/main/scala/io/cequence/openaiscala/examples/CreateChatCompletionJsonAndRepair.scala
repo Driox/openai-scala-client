@@ -23,7 +23,7 @@ object CreateChatCompletionJsonAndRepair
     )
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionWithJSON[JsObject](
         messages = messages,

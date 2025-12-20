@@ -23,7 +23,7 @@ object CreateChatCompletionJsonAdapter
     UserMessage("List only african countries")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionWithJSON[JsObject](
         messages = messages,

@@ -22,7 +22,7 @@ object AnthropicCreateMessageWithThinking extends ExampleBase[AnthropicService] 
     UserMessage("What is the weather like in Norway with your local insights?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createMessage(
         messages,

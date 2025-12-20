@@ -23,7 +23,7 @@ object AnthropicCreateMessageWithBash extends ExampleBase[AnthropicService] {
     UserMessage("Create a CSV file with sample sales data for 5 products.")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       response <- service.createMessage(
         messages,

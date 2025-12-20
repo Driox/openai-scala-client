@@ -37,7 +37,7 @@ object CreateChatCompletionJsonForCaseClass extends Example with JsonSchemaRefle
     UserMessage("List the most populous African countries in the prescribed JSON format")
   )
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     // chat completion JSON run
     service
       .createChatCompletionWithJSON[CapitalsResponse](

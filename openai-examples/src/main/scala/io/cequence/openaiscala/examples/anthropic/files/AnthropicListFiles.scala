@@ -10,7 +10,7 @@ object AnthropicListFiles extends ExampleBase[AnthropicService] {
 
   override protected val service: AnthropicService = AnthropicServiceFactory()
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     println("=" * 60)
     println("Listing files in workspace")
     println("=" * 60)

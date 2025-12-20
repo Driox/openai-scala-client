@@ -20,7 +20,7 @@ object AnthropicCreateMessage extends ExampleBase[AnthropicService] {
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createMessage(
         messages,

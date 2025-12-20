@@ -17,7 +17,7 @@ object CreateChatCompletionJson extends Example with TestFixtures with OpenAISer
     UserMessage("List only african countries")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

@@ -19,7 +19,7 @@ object CreateVectorStoreFile extends Example {
     tempFile
   }
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     val file = knowledgeTempFile()
     for {
       fileInfo <- service.uploadFile(file, purpose = FileUploadPurpose.assistants)

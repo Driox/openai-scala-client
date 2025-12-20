@@ -37,7 +37,7 @@ object RandomOrderAdapterExample extends ExampleBase[OpenAIService] {
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     // source of 10 repetitions
     val repetitionSource = Source.fromIterator(() => (1 to repetitions).iterator)
 

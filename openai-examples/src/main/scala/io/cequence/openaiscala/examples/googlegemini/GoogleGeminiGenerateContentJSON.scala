@@ -64,7 +64,7 @@ object GoogleGeminiGenerateContentJSON extends ExampleBase[GeminiService] {
     required = Some(Seq("countries"))
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .generateContent(
         contents,

@@ -6,7 +6,7 @@ import scala.concurrent.Future
 
 object ListBatches extends Example {
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistants <- service.listBatches(Pagination.limit(5))
     } yield {

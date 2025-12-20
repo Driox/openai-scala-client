@@ -15,7 +15,7 @@ object UploadBatchFile extends Example {
     tempFile
   }
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     val file = chatCompletionsTempFile()
     for {
       fileInfo <- service.uploadBatchFile(file)

@@ -17,7 +17,7 @@ object CreateChatCompletionWithO1 extends Example {
     UserMessage("What is the weather like in Norway per major cities? Answer in json format.")
   )
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     val start = new java.util.Date()
 
     service

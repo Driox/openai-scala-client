@@ -43,7 +43,7 @@ object GroqCreateChatCompletionJSON extends ExampleBase[OpenAIChatCompletionServ
 
   private val modelId = NonOpenAIModelId.moonshotai_kimi_k2_instruct_0905
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionWithJSON[JsObject](
         messages = messages,

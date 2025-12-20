@@ -25,7 +25,7 @@ object SonarCreateChatCompletionStreamedWithOpenAIAdapter
 
   private val modelId = NonOpenAIModelId.sonar_reasoning_pro
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

@@ -30,7 +30,7 @@ object CreateRunWithCodeInterpretation extends Example with PollingHelper {
 
   private val assistantId = "asst_xxx"
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       thread <- service.createThread(
         messages = Seq(ThreadMessage(s"Plot the following data:\n$data"))

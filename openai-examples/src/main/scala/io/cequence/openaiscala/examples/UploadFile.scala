@@ -15,7 +15,7 @@ object UploadFile extends Example {
       )
       .toFile
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       fileInfo <- service.uploadFile(scheduleFile(), purpose = FileUploadPurpose.assistants)
     } yield {

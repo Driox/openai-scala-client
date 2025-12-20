@@ -4,7 +4,7 @@ import scala.concurrent.Future
 
 object RetrieveBatchFile extends Example {
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistant <- service.retrieveBatchFile("batch_Ghy5a9EEXDLFqBcJqANpr17F")
     } yield {

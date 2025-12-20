@@ -35,7 +35,7 @@ object GrokCreateChatCompletionWithImage
 
   private val modelId = NonOpenAIModelId.grok_2_vision_latest
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

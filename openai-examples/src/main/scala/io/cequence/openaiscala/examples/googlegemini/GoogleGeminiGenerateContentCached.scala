@@ -40,7 +40,7 @@ object GoogleGeminiGenerateContentCached extends ExampleBase[GeminiService] {
       User
     )
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     def listCachedContents =
       service.listCachedContents().map { cachedContentsResponse =>
         logger.info(

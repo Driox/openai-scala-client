@@ -16,7 +16,7 @@ object AnthropicDownloadFile extends ExampleBase[AnthropicService] {
   // You can get file IDs by running AnthropicListFiles
   private val fileId = "file_01..."
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     println("=" * 60)
     println("Downloading file")
     println("=" * 60)

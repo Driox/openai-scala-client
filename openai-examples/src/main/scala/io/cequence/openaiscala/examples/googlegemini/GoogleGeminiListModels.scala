@@ -10,7 +10,7 @@ object GoogleGeminiListModels extends ExampleBase[GeminiService] {
 
   override protected val service: GeminiService = GeminiServiceFactory()
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service.listModels(pageSize = Some(100)).map { modelsResponse =>
       println(
         "Models: \n" + modelsResponse.models

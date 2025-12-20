@@ -25,7 +25,7 @@ object GoogleGeminiGenerateContentStreamed extends ExampleBase[GeminiService] {
     Content.textPart("What is the weather like in Norway?", User)
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .generateContentStreamed(
         contents,

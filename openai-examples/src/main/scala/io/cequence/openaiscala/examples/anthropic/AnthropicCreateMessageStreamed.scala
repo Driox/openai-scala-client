@@ -22,7 +22,7 @@ object AnthropicCreateMessageStreamed extends ExampleBase[AnthropicService] {
 
   private val modelId = NonOpenAIModelId.claude_3_5_haiku_20241022
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createMessageStreamed(
         messages,

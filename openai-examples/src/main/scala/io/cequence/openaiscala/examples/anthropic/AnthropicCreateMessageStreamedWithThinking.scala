@@ -25,7 +25,7 @@ object AnthropicCreateMessageStreamedWithThinking extends ExampleBase[AnthropicS
 
   private val modelId = NonOpenAIModelId.claude_3_7_sonnet_20250219
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createMessageStreamed(
         messages,

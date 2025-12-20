@@ -5,7 +5,7 @@ import io.cequence.openaiscala.domain.Batch.{BatchEndpoint, CompletionWindow}
 import scala.concurrent.Future
 
 object CreateBatch extends Example {
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistant <- service.createBatch(
         inputFileId = "file-xyz",

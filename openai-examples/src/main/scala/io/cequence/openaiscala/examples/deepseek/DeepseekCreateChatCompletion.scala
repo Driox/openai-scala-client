@@ -21,7 +21,7 @@ object DeepseekCreateChatCompletion extends ExampleBase[OpenAIChatCompletionServ
 
   private val modelId = NonOpenAIModelId.deepseek_chat
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

@@ -19,7 +19,7 @@ object OctoMLCreateChatCompletion extends ExampleBase[OpenAIChatCompletionServic
 
   private val modelId = NonOpenAIModelId.hermes_2_pro_llama_3_8b
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

@@ -7,7 +7,7 @@ object RetrieveFileContentStreamed extends Example {
 
   private val fileId = "file-xxx"
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       fileInfoOption <- service.retrieveFile(fileId)
 

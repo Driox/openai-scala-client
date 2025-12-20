@@ -12,7 +12,7 @@ object AnthropicDeleteSkill extends ExampleBase[AnthropicService] {
 
   private val skillId = "skill_01..."
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     println(s"Attempting to delete skill: $skillId")
     println("WARNING: This will permanently delete the skill!")
     println()

@@ -45,7 +45,7 @@ object RetryAdapterExample extends ExampleBase[OpenAIService] {
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       // this invokes the failing service, which triggers the retry mechanism
       _ <- runChatCompletionAux(ModelId.gpt_4o).recover { case e: OpenAIScalaClientException =>

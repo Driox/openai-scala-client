@@ -37,7 +37,7 @@ object AnthropicCreateMessageWithJsonSchema extends ExampleBase[AnthropicService
     UserMessage("What is the weather like in Norway? List several cities.")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createMessage(
         messages,

@@ -41,7 +41,7 @@ object CreateChatCompletionWithRouter extends ExampleBase[OpenAIChatCompletionSe
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       _ <- runChatCompletionAux("mixtral-8x7b-instruct")
       _ <- runChatCompletionAux("llama2")

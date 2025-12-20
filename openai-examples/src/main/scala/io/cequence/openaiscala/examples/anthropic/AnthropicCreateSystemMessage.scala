@@ -22,7 +22,7 @@ object AnthropicCreateSystemMessage extends ExampleBase[AnthropicService] {
     UserMessage("Who is the most famous football player in the World?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createMessage(
         systemMessages ++ messages,

@@ -38,7 +38,7 @@ trait ExampleBase[T <: CloseableService] {
     system.terminate()
   }
 
-  protected def run: Future[_]
+  protected def run: Future[?]
 
   protected def printMessageContent(response: ChatCompletionResponse): Unit =
     println(response.contentHead)

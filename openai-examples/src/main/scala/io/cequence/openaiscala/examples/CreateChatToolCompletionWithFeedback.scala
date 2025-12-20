@@ -39,7 +39,7 @@ object CreateChatToolCompletionWithFeedback extends Example {
     )
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistantToolResponse <- service.createChatToolCompletion(
         messages = introMessages,

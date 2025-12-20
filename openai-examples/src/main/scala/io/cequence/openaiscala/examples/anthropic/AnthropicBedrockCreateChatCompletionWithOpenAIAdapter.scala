@@ -22,7 +22,7 @@ object AnthropicBedrockCreateChatCompletionWithOpenAIAdapter
     // using 'us.' prefix because of the cross-region inference (enabled only in the us)
     "us." + NonOpenAIModelId.bedrock_claude_sonnet_4_20250514_v1_0
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

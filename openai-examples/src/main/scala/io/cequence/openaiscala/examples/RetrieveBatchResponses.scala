@@ -4,7 +4,7 @@ import scala.concurrent.Future
 
 object RetrieveBatchResponses extends Example {
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       maybeBatchResponses <- service.retrieveBatchResponses("batch_xyz")
     } yield {

@@ -3,7 +3,7 @@ import scala.concurrent.Future
 
 object RetrieveAssistant extends Example {
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistant <- service.retrieveAssistant(
         assistantId = "asst_xxx"

@@ -17,7 +17,7 @@ object CreateChatCompletionWithWebSearch extends Example {
     UserMessage("When was the last tornado in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatWebSearchCompletion(
         messages = messages,

@@ -21,7 +21,7 @@ object AnthropicRetryAdapterExample extends ExampleBase[OpenAIChatCompletionServ
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       // this invokes the failing service, which triggers the retry mechanism
       _ <- runChatCompletionAux(failingModel).recover { case e: OpenAIScalaClientException =>

@@ -38,7 +38,7 @@ object FireworksAICreateChatCompletionStreamedWithDeepseek
 
   private val modelId = NonOpenAIModelId.deepseek_r1
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

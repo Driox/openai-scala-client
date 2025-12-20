@@ -39,7 +39,7 @@ object FireworksAIDocumentInliningLocal extends ExampleBase[OpenAIChatCompletion
     )
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages,

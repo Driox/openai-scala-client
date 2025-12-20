@@ -6,7 +6,7 @@ import io.cequence.openaiscala.domain.{AssistantToolResource, ModelId}
 import scala.concurrent.Future
 
 object CreateAssistant extends Example {
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistant <- service.createAssistant(
         model = ModelId.gpt_4o_mini,

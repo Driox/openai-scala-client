@@ -22,7 +22,7 @@ object CreateCompletionStreamed extends ExampleBase[OpenAIStreamedService] {
       |Maya
     """.stripMargin
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createCompletionStreamed(text)
       .runWith(

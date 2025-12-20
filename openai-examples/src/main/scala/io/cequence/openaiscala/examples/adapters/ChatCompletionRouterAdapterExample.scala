@@ -71,7 +71,7 @@ object ChatCompletionRouterAdapterExample extends ExampleBase[OpenAIService] {
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       // runs on OctoML
       _ <- runChatCompletionAux(NonOpenAIModelId.mixtral_8x22b_instruct)

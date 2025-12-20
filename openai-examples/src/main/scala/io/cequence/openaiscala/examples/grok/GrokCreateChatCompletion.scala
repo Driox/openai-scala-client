@@ -21,7 +21,7 @@ object GrokCreateChatCompletion extends ExampleBase[OpenAIChatCompletionService]
 
   private val modelId = NonOpenAIModelId.grok_4_fast_reasoning
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

@@ -12,7 +12,7 @@ object AnthropicListSkillVersions extends ExampleBase[AnthropicService] {
 
   private val skillId = "skill_01..."
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     println(s"Listing versions for skill: $skillId")
     println()
 

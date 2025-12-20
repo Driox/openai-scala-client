@@ -29,7 +29,7 @@ object AnthropicCreateChatCompletionStreamedWithOpenAIAdapter
   @volatile var attemptCounter = 0
   private val maxAttempts = 3
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     def createSource(): Source[String, NotUsed] =
       service
         .createChatCompletionStreamed(

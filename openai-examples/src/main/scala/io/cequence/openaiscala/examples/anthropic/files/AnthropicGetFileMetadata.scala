@@ -14,7 +14,7 @@ object AnthropicGetFileMetadata extends ExampleBase[AnthropicService] {
   // You can get file IDs by running AnthropicListFiles
   val fileId = "file_01..."
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     println("=" * 60)
     println("Getting file metadata")
     println("=" * 60)

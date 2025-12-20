@@ -21,7 +21,7 @@ object CreateChatCompletionVisionWithLocalFile extends Example with BufferedImag
     )
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages,

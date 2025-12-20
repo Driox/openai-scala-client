@@ -373,7 +373,7 @@ object AnthropicCreateCachedMessage extends ExampleBase[AnthropicService] {
     )
   )
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     def exec = service.createMessage(
       systemMessages ++ messages,
       settings = AnthropicCreateMessageSettings(

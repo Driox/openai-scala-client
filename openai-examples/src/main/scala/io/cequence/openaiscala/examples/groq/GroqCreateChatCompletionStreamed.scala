@@ -21,7 +21,7 @@ object GroqCreateChatCompletionStreamed
 
   private val modelId = NonOpenAIModelId.llama_3_1_70b_versatile // mixtral_8x7b_32768
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

@@ -27,7 +27,7 @@ object NovitaCreateChatCompletionStreamed
 
   private val modelId = NonOpenAIModelId.novita_deepseek_r1
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

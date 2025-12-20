@@ -51,7 +51,7 @@ object AnthropicCreateMessageWithMCPServer extends ExampleBase[AnthropicService]
     mcp_servers = Seq(semgrepMcpServer)
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       response1 <- {
         println("=" * 60)

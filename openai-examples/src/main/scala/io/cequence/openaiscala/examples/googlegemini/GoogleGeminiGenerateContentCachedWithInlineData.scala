@@ -44,7 +44,7 @@ object GoogleGeminiGenerateContentCachedWithInlineData extends ExampleBase[Gemin
       )
     )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       // create cached content
       saveCachedContent <- service.createCachedContent(

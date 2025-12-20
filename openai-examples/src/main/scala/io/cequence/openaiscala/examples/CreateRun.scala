@@ -35,7 +35,7 @@ object CreateRun extends Example {
       )
     } yield thread
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
       assistant <- createPlanner
       eventsThread <- createEventMessages

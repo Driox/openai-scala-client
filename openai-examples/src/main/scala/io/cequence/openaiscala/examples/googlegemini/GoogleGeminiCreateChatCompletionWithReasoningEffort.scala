@@ -42,7 +42,7 @@ object GoogleGeminiCreateChatCompletionWithReasoningEffort
     )
   )
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     // Example with no reasoning effort (thinking disabled)
     println("=== Example 1: No Reasoning Effort (Baseline) ===")
     for {

@@ -23,7 +23,7 @@ object GoogleVertexAICreateChatCompletionStreamedWithOpenAIAdapter
     UserMessage("What is the weather like in Norway?")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

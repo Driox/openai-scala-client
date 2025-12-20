@@ -32,7 +32,7 @@ object AnthropicCreateMessageWithXlsxSkill extends ExampleBase[AnthropicService]
   // filename sales_data.txt (csv file) already uploaded
   private val fileId = "file_01..."
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     // Using Anthropic's built-in xlsx skill
     val messages = Seq(
       UserMessageContent(

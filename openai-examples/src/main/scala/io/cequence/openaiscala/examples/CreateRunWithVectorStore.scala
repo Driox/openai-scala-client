@@ -57,7 +57,7 @@ object CreateRunWithVectorStore extends Example {
 
   val vectorStoreId = "vs_6nTuNJKVytSoFke9nvnpptUZ" // createVectorStore(fileInfo).map(_.id)
   val assistantId = "asst_gIharZ60V7hvf5pQvvjkw7Mf"
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     for {
 //      fileInfo <- uploadFile
 //      assistant <- createPlanner(vectorStoreId)

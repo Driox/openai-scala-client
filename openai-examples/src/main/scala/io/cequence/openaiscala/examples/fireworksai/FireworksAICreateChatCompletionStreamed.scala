@@ -23,7 +23,7 @@ object FireworksAICreateChatCompletionStreamed
 
   private val modelId = NonOpenAIModelId.llama4_scout_instruct_basic
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

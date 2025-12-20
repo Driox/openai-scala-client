@@ -21,7 +21,7 @@ object GroqCreateChatCompletion extends ExampleBase[OpenAIChatCompletionService]
 
   private val modelId = NonOpenAIModelId.groq_llama_4_scout_17b_16e_instruct
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

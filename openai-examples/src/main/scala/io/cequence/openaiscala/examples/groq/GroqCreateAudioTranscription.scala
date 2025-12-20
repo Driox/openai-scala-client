@@ -25,7 +25,7 @@ object GroqCreateAudioTranscription extends ExampleBase[OpenAIService] {
 
   private val audioFile = getClass.getResource("/wolfgang.mp3").getFile
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createAudioTranscription(
         new java.io.File(audioFile),

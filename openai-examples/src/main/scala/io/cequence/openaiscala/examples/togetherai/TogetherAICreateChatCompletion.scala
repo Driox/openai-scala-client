@@ -23,7 +23,7 @@ object TogetherAICreateChatCompletion extends ExampleBase[OpenAIChatCompletionSe
   private val modelId =
     NonOpenAIModelId.meta_llama_llama_4_maverick_17b_128e_instruct_fp8
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

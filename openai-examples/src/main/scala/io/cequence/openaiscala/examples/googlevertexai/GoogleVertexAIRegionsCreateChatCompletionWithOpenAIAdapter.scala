@@ -77,10 +77,10 @@ object GoogleVertexAIRegionsCreateChatCompletionWithOpenAIAdapter
       }: _*
     )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     Future.sequence(vertexAILocations.map(_ => runForRegion)).map(_ => ())
 
-  private def runForRegion: Future[_] = {
+  private def runForRegion: Future[?] = {
     service.createChatCompletion(
       messages = messages,
       settings = CreateChatCompletionSettings(

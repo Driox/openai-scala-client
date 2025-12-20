@@ -27,7 +27,7 @@ object FireworksAICreateChatCompletion extends ExampleBase[OpenAIChatCompletionS
 //  private val modelId = NonOpenAIModelId.deepseek_r1
   private val modelId = NonOpenAIModelId.gpt_oss_20b
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

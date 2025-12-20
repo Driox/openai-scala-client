@@ -55,7 +55,7 @@ object AnthropicCreateChatCompletionWithJsonSchemaAndOpenAIAdapterFailing
     UserMessage("Just give me a random json with these properties in Czech.")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionWithJSON[JsObject](
         messages = messages,

@@ -46,7 +46,7 @@ object AnthropicCreateMessageWithTextContentsAndCitations
     )
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createMessage(
         messages,

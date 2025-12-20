@@ -25,7 +25,7 @@ object CreateChatCompletionStreamedJson
     UserMessage("List all asian countries and their capitals.")
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletionStreamed(
         messages = messages,

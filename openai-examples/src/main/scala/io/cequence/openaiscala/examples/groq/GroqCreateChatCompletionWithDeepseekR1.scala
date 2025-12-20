@@ -24,7 +24,7 @@ object GroqCreateChatCompletionWithDeepseekR1
   private val modelId = NonOpenAIModelId.deepseek_r1_distill_llama_70b
   private val reasoningFormat = ReasoningFormat.hidden
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatCompletion(
         messages = messages,

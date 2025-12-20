@@ -85,7 +85,7 @@ object AnthropicCreateMessageWithTools extends ExampleBase[AnthropicService] {
     }
   }
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     for {
       response1 <- {
         println("=" * 60)

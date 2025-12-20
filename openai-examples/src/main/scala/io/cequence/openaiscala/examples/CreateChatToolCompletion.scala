@@ -40,7 +40,7 @@ object CreateChatToolCompletion extends Example {
     )
   )
 
-  override protected def run: Future[_] =
+  override protected def run: Future[?] =
     service
       .createChatToolCompletion(
         messages = messages,

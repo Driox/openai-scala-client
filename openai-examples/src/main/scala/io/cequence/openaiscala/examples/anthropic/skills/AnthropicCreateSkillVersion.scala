@@ -14,7 +14,7 @@ object AnthropicCreateSkillVersion extends ExampleBase[AnthropicService] {
 
   private val skillId = "skill_01..."
 
-  override protected def run: Future[_] = {
+  override protected def run: Future[?] = {
     // Create a temporary directory with skill files
     val tempDir = Files.createTempDirectory("example-skill-version").toFile
     tempDir.deleteOnExit()
