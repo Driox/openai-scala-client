@@ -33,7 +33,7 @@ private[service] class SonarServiceImpl(
   override protected type PEP = EndPoint
   override protected type PT = Param
 
-  override protected val engine: WSClientEngine with WSClientEngineStreamExtra =
+  override protected val engine: WSClientEngine & WSClientEngineStreamExtra =
     PlayWSStreamClientEngine(
       coreUrl,
       WsRequestContext(authHeaders = Seq(("Authorization", s"Bearer ${apiKey}")))

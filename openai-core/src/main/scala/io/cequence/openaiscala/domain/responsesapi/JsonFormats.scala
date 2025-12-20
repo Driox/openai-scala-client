@@ -129,7 +129,7 @@ object JsonFormats {
         (__ \ "encrypted_content").formatNullable[String] and
         (__ \ "status").formatNullable[ModelStatus]
     )(
-      Reasoning.apply _,
+      Reasoning.apply,
       (x: Reasoning) => (x.id, x.summary, x.content, x.encryptedContent, x.status)
     )
 
@@ -413,7 +413,7 @@ object JsonFormats {
       (__ \ "id").read[String] and
         (__ \ "variables").readWithDefault[Map[String, Any]](Map.empty) and
         (__ \ "version").readNullable[String]
-    )(Prompt.apply _)
+    )(Prompt.apply)
 
     val writes: OWrites[Prompt] = Json.writes[Prompt]
 
@@ -438,7 +438,7 @@ object JsonFormats {
         (__ \ "stream").readNullable[Boolean] and
         (__ \ "temperature").readNullable[Double] and
         (__ \ "text").readNullable[TextResponseConfig]
-    )(CreateModelResponseSettingsAuxPart1.apply _)
+    )(CreateModelResponseSettingsAuxPart1.apply)
 
   private implicit lazy val createModelResponseSettingsAuxPart1Writes
     : OWrites[CreateModelResponseSettingsAuxPart1] =
@@ -490,7 +490,7 @@ object JsonFormats {
         (__ \ "service_tier").readNullable[String] and
         (__ \ "stream_options").readNullable[StreamOptions] and
         (__ \ "top_logprobs").readNullable[Int]
-    )(CreateModelResponseSettingsAuxPart2.apply _)
+    )(CreateModelResponseSettingsAuxPart2.apply)
 
   private implicit lazy val createModelResponseSettingsAuxPart2Writes
     : OWrites[CreateModelResponseSettingsAuxPart2] =

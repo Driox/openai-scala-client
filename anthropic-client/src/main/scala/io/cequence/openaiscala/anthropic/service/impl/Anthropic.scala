@@ -54,10 +54,10 @@ trait Anthropic
           val blocks =
             Seq(Content.ContentBlockBase(Content.ContentBlock.TextBlock(text), cacheControl))
 
-          Json.toJson(blocks)(Writes.seq(contentBlockBaseWrites))
+          Json.toJson(blocks)(using Writes.seq(using contentBlockBaseWrites))
         }
       case SystemMessageContent(blocks) =>
-        Json.toJson(blocks)(Writes.seq(contentBlockBaseWrites))
+        Json.toJson(blocks)(using Writes.seq(using contentBlockBaseWrites))
     }
 
     def setAdditionalPropertiesToFalseByDefault(schema: JsonSchema): JsonSchema =
@@ -99,28 +99,28 @@ trait Anthropic
       Param.top_p -> settings.top_p,
       Param.top_k -> settings.top_k,
       Param.thinking -> settings.thinking.map(
-        Json.toJson(_)(thinkingSettingsFormat)
+        Json.toJson(_)(using thinkingSettingsFormat)
       ),
       Param.container -> settings.container.map(
-        Json.toJson(_)(containerFormat)
+        Json.toJson(_)(using containerFormat)
       ),
       Param.tools -> {
         if (settings.tools.nonEmpty)
-          Some(Json.toJson(settings.tools)(Writes.seq(toolWrites)))
+          Some(Json.toJson(settings.tools)(using Writes.seq(using toolWrites)))
         else
           None
       },
       Param.tool_choice -> settings.tool_choice.map(
-        Json.toJson(_)(toolChoiceFormat)
+        Json.toJson(_)(using toolChoiceFormat)
       ),
       Param.mcp_servers -> {
         if (settings.mcp_servers.nonEmpty)
-          Some(Json.toJson(settings.mcp_servers)(Writes.seq(mcpServerURLDefinitionWrites)))
+          Some(Json.toJson(settings.mcp_servers)(using Writes.seq(using mcpServerURLDefinitionWrites)))
         else
           None
       },
       Param.output_format -> outputFormat.map(
-        Json.toJson(_)(outputFormatFormat)
+        Json.toJson(_)(using outputFormatFormat)
       )
     )
   }

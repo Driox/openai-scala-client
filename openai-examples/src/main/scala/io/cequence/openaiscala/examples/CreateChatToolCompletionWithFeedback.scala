@@ -57,7 +57,7 @@ object CreateChatToolCompletionWithFeedback extends Example {
         (toolCallId, x)
       }
 
-      available_functions = Map("get_current_weather" -> getCurrentWeather _)
+      available_functions = Map("get_current_weather" -> getCurrentWeather)
 
       toolMessages = functionCalls.map { case (toolCallId, functionCallSpec) =>
         val functionName = functionCallSpec.name

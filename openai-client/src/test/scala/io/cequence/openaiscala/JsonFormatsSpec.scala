@@ -471,9 +471,9 @@ class JsonFormatsSpec extends AnyWordSpecLike with Matchers {
                    |}""".stripMargin
 
       implicit lazy val format: Format[FineTuneJob] = JsonFormats.fineTuneJobFormat
-      implicit lazy val reader = implicitly[Format[FineTuneJob]](format)
+      implicit lazy val reader = implicitly[Format[FineTuneJob]](using format)
 
-      val fineTuneJob = Json.parse(json).as[FineTuneJob](reader)
+      val fineTuneJob = Json.parse(json).as[FineTuneJob](using reader)
 
       fineTuneJob.id shouldBe "xxx"
       fineTuneJob.model shouldBe "gpt-4o-2024-08-06"
@@ -545,7 +545,7 @@ class JsonFormatsSpec extends AnyWordSpecLike with Matchers {
         ThreadMessageContentJson,
         Pretty,
         justSemantics = true
-      )(threadMessageContentFormat)
+      )(using threadMessageContentFormat)
     }
 
     "serialize and deserialize assistant tools" in {

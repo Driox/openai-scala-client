@@ -36,7 +36,7 @@ private[service] class GeminiServiceImpl(
   override protected type PEP = EndPoint
   override protected type PT = Param
 
-  override protected val engine: WSClientEngine with WSClientEngineStreamExtra =
+  override protected val engine: WSClientEngine & WSClientEngineStreamExtra =
     PlayWSStreamClientEngine(
       coreUrl,
       WsRequestContext(
@@ -134,7 +134,7 @@ private[service] class GeminiServiceImpl(
   ): Future[CachedContent] =
     execPOSTBody(
       EndPoint.cachedContents,
-      body = Json.toJson(cachedContent)(cachedContentFormat)
+      body = Json.toJson(cachedContent)(using cachedContentFormat)
     ).map(
       _.asSafeJson[CachedContent]
     )

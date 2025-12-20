@@ -54,7 +54,7 @@ private[service] trait OpenAIServiceImpl
       createBodyParamsForChatCompletion(messages, settings, stream = false)
 
     val extraParams = jsonBodyParams(
-      Param.functions -> Some(functions.map(Json.toJson(_)(chatCompletionToolWrites))),
+      Param.functions -> Some(functions.map(Json.toJson(_)(using chatCompletionToolWrites))),
       Param.function_call -> responseFunctionName.map(name =>
         Map("name" -> name)
       ) // otherwise "auto" is used by default (if functions are present)
@@ -83,7 +83,7 @@ private[service] trait OpenAIServiceImpl
 
     val toolParam = toolParams(tools, responseToolChoice)
 
-    val messageJsons = additionalMessages.map(Json.toJson(_)(messageWrites))
+    val messageJsons = additionalMessages.map(Json.toJson(_)(using messageWrites))
 
     val runParams = jsonBodyParams(
       Param.assistant_id -> Some(assistantId),
@@ -157,7 +157,7 @@ private[service] trait OpenAIServiceImpl
       EndPoint.threads,
       Some(s"$threadId/runs/$runId/submit_tool_outputs"),
       bodyParams = jsonBodyParams(
-        Param.tool_outputs -> Some(toolOutputs.map(Json.toJson(_)(assistantToolOutputFormat))),
+        Param.tool_outputs -> Some(toolOutputs.map(Json.toJson(_)(using assistantToolOutputFormat))),
         Param.stream -> Some(stream)
       )
     ).map(
@@ -799,7 +799,7 @@ private[service] trait OpenAIServiceImpl
       bodyParams = jsonBodyParams(
         Param.messages -> (
           if (messages.nonEmpty)
-            Some(messages.map(Json.toJson(_)(threadMessageFormat)))
+            Some(messages.map(Json.toJson(_)(using threadMessageFormat)))
           else None
         ),
         Param.metadata -> (if (metadata.nonEmpty) Some(metadata) else None),

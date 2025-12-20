@@ -58,7 +58,7 @@ trait JsonFormats {
     (json \ "type").validate[String].flatMap {
       case "json_schema" =>
         (json \ "json_schema" \ "schema")
-          .validate[Map[String, Any]](JsonUtil.StringAnyMapFormat)
+          .validate[Map[String, Any]](using JsonUtil.StringAnyMapFormat)
           .map { jsonSchema =>
             SolarResponseFormat.JsonSchema(jsonSchema)
           }
@@ -74,7 +74,7 @@ trait JsonFormats {
 
   implicit lazy val solarResponseFormatWrites: Writes[SolarResponseFormat] = {
     case x: SolarResponseFormat.JsonSchema =>
-      val jsonSchema = Json.toJson(x.jsonSchema)(JsonUtil.StringAnyMapFormat)
+      val jsonSchema = Json.toJson(x.jsonSchema)(using JsonUtil.StringAnyMapFormat)
       Json.obj(
         "type" -> "json_schema",
         "json_schema" -> Json.obj("schema" -> jsonSchema)

@@ -24,7 +24,7 @@ trait OpenAIResponseServiceImpl extends OpenAIResponsesService with OpenAIServic
     settings: CreateModelResponseSettings
   ): Future[Response] = {
     val input = inputsWrites.writes(inputs)
-    val body = Json.toJsObject(settings)(createModelResponseSettingsFormat)
+    val body = Json.toJsObject(settings)(using createModelResponseSettingsFormat)
 
     execPOSTBody(
       EndPoint.responses,
@@ -65,7 +65,7 @@ trait OpenAIResponseServiceImpl extends OpenAIResponsesService with OpenAIServic
     settings: GetInputTokensCountSettings
   ): Future[InputTokensCount] = {
     val input = inputsWrites.writes(inputs)
-    val body = Json.toJsObject(settings)(getInputTokensCountSettingsFormat)
+    val body = Json.toJsObject(settings)(using getInputTokensCountSettingsFormat)
 
     execPOSTBody(
       EndPoint.responses,

@@ -20,7 +20,7 @@ trait OpenAIGraderServiceImpl extends OpenAIGraderService with OpenAIServiceWSBa
     val body = Json.obj(
       "grader" -> Json.toJson(grader),
       "model_sample" -> modelSample,
-      "item" -> Json.toJson(item)(StringAnyMapFormat)
+      "item" -> Json.toJson(item)(using StringAnyMapFormat)
     )
 
     execPOSTBody(

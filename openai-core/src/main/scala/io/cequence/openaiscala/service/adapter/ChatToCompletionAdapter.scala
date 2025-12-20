@@ -23,7 +23,7 @@ import io.cequence.wsclient.service.adapter.ServiceWrapper
 import scala.concurrent.{ExecutionContext, Future}
 
 private class ChatToCompletionAdapter[
-  S <: OpenAICompletionService with OpenAIChatCompletionService
+  S <: OpenAICompletionService & OpenAIChatCompletionService
 ](
   underlying: S
 )(

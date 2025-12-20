@@ -50,7 +50,7 @@ object JsonFormats {
         (__ \ "root").readNullable[String] and
         (__ \ "parent").readNullable[String] and
         (__ \ "permission").read[Seq[Permission]].orElse(Reads.pure(Nil))
-    )(ModelInfo.apply _)
+    )(ModelInfo.apply)
 
     val writes: Writes[ModelInfo] = Json.writes[ModelInfo]
     Format(reads, writes)
@@ -183,7 +183,7 @@ object JsonFormats {
         for {
           name <- (json \ "name").validate[String]
           description <- (json \ "description").validateOpt[String]
-          parameters <- (json \ "parameters").validate[Map[String, Any]](mapFormat)
+          parameters <- (json \ "parameters").validate[Map[String, Any]](using mapFormat)
           strict <- (json \ "strict").validateOpt[Boolean]
         } yield AssistantTool.FunctionTool(name, description, parameters, strict)
       }
@@ -201,10 +201,10 @@ object JsonFormats {
           case "code_interpreter" => JsSuccess(AssistantTool.CodeInterpreterTool)
           case "file_search" =>
             (json \ "file_search")
-              .validate[AssistantTool.FileSearchTool](assistantFileSearchToolFormat)
+              .validate[AssistantTool.FileSearchTool](using assistantFileSearchToolFormat)
           case "function" =>
             (json \ "function")
-              .validate[AssistantTool.FunctionTool](assistantFunctionToolFormat)
+              .validate[AssistantTool.FunctionTool](using assistantFunctionToolFormat)
           case _ => JsError("Unknown type")
         }
       },
@@ -223,7 +223,7 @@ object JsonFormats {
             JsObject(
               Seq(
                 "file_search" -> Json
-                  .toJson(fileSearchTool)(assistantFileSearchToolFormat)
+                  .toJson(fileSearchTool)(using assistantFileSearchToolFormat)
                   .as[JsObject]
               )
             )
@@ -231,7 +231,7 @@ object JsonFormats {
             JsObject(
               Seq(
                 "function" -> Json
-                  .toJson(functionTool)(assistantFunctionToolFormat)
+                  .toJson(functionTool)(using assistantFunctionToolFormat)
                   .as[JsObject]
               )
             )
@@ -386,7 +386,7 @@ object JsonFormats {
       (__ \ "token").read[String] and
         (__ \ "logprob").read[Double] and
         (__ \ "bytes").read[Seq[Short]].orElse(Reads.pure(Nil))
-    )(TopLogprobInfo.apply _)
+    )(TopLogprobInfo.apply)
 
     val writes: Writes[TopLogprobInfo] = Json.writes[TopLogprobInfo]
     Format(reads, writes)
@@ -539,7 +539,7 @@ object JsonFormats {
       (json: JsValue) => {
         (json \ typeDiscriminatorKey).validate[String].flatMap { case `weightsAndBiasesType` =>
           (json \ weightsAndBiasesType)
-            .validate[WeightsAndBiases](weightsAndBiasesIntegrationFormat)
+            .validate[WeightsAndBiases](using weightsAndBiasesIntegrationFormat)
         }
       },
       { (integration: FineTune.Integration) =>
@@ -573,7 +573,7 @@ object JsonFormats {
       (__ \ "validation_file").formatNullable[String] and
       (__ \ "result_files").format[Seq[String]] and
       (__ \ "trained_tokens").formatNullable[Int] and
-      (__ \ "error").format[Option[FineTuneError]](fineTuneErrorFormat) and
+      (__ \ "error").format[Option[FineTuneError]](using fineTuneErrorFormat) and
       (__ \ "hyperparameters").format[FineTuneHyperparams] and
       (__ \ "integrations").formatNullable[Seq[FineTune.Integration]] and
       (__ \ "seed").format[Int]
@@ -708,9 +708,9 @@ object JsonFormats {
 
   implicit lazy val assistantToolResourceWrites: Writes[AssistantToolResource] = Writes {
     case AssistantToolResource(Some(codeInterpreter), _) =>
-      Json.toJson(codeInterpreter)(assistantToolResourceCodeInterpreterResourceWrites)
+      Json.toJson(codeInterpreter)(using assistantToolResourceCodeInterpreterResourceWrites)
     case AssistantToolResource(_, Some(fileSearch)) =>
-      Json.toJson(fileSearch)(assistantToolResourceFileSearchResourceWrites)
+      Json.toJson(fileSearch)(using assistantToolResourceFileSearchResourceWrites)
     case _ => Json.obj()
   }
 
@@ -729,7 +729,7 @@ object JsonFormats {
         (__ \ "vector_stores")
           .readNullable[Seq[AssistantToolResource.VectorStore]]
           .map(_.getOrElse(Seq.empty))
-    )(AssistantToolResource.FileSearchResources.apply _)
+    )(AssistantToolResource.FileSearchResources.apply)
   }
 
   implicit lazy val assistantToolResourceReads: Reads[AssistantToolResource] = (
@@ -775,7 +775,7 @@ object JsonFormats {
           .read[Seq[AssistantToolResourceResponse]]
           .orElse(Reads.pure(Nil)) and
         (__ \ "metadata").read[Map[String, String]].orElse(Reads.pure(Map()))
-    )(Thread.apply _)
+    )(Thread.apply)
 
   implicit val fileIdFormat: Format[FileId] = Format(
     Reads.StringReads.map(FileId.apply),
@@ -817,7 +817,7 @@ object JsonFormats {
         (__ \ "run_id").readNullable[String] and
         (__ \ "attachments").read[Seq[Attachment]].orElse(Reads.pure(Nil)) and
         (__ \ "metadata").read[Map[String, String]].orElse(Reads.pure(Map()))
-    )(ThreadFullMessage.apply _)
+    )(ThreadFullMessage.apply)
 
   implicit lazy val threadFullMessageWrites: Writes[ThreadFullMessage] =
     Json.writes[ThreadFullMessage]
@@ -893,7 +893,7 @@ object JsonFormats {
       (__ \ "temperature").readNullable[Double].orElse(Reads.pure(None)) and
       (__ \ "top_p").readNullable[Double].orElse(Reads.pure(None)) and
       (__ \ "response_format").read[ResponseFormat]
-  )(Assistant.apply _)
+  )(Assistant.apply)
 
 //  implicit lazy val assistantWrites: Writes[Assistant] =
 //    Json.writes[Assistant]
@@ -990,7 +990,7 @@ object JsonFormats {
       (json \ "type").validate[String].flatMap {
         case "auto" => JsSuccess(AutoChunkingStrategy)
         case "static" =>
-          (json.validate[ChunkingStrategy](chunkingStrategyFormatReads))
+          (json.validate[ChunkingStrategy](using chunkingStrategyFormatReads))
         case "" => JsSuccess(AutoChunkingStrategy)
         case _  => JsError("Unknown chunking strategy type")
       }
@@ -1288,7 +1288,7 @@ object JsonFormats {
     implicit val stringReads: Reads[JsonSchema.String] = (
       (__ \ "description").readNullable[String] and
         (__ \ "enum").readWithDefault[Seq[String]](Nil)
-    )(JsonSchema.String.apply _)
+    )(JsonSchema.String.apply)
 
     implicit val numberReads: Reads[JsonSchema.Number] = Json.reads[JsonSchema.Number]
     implicit val integerReads: Reads[JsonSchema.Integer] = Json.reads[JsonSchema.Integer]

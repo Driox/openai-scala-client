@@ -55,7 +55,7 @@ class AnthropicServiceClassImpl(
   implicit val ec: ExecutionContext,
   val materializer: Materializer
 ) extends AnthropicServiceImpl {
-  override protected val engine: WSClientEngine with WSClientEngineStreamExtra =
+  override protected val engine: WSClientEngine & WSClientEngineStreamExtra =
     PlayWSStreamClientEngine(coreUrl, requestContext)
 }
 

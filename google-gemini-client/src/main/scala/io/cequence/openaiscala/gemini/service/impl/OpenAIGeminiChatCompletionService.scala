@@ -286,7 +286,7 @@ private[service] class OpenAIGeminiChatCompletionService(
     settings: CreateChatCompletionSettings
   ) = {
     def notSupported(
-      field: CreateChatCompletionSettings => Option[_],
+      field: CreateChatCompletionSettings => Option[?],
       fieldName: String
     ): Unit =
       field(settings).foreach { _ =>
@@ -294,7 +294,7 @@ private[service] class OpenAIGeminiChatCompletionService(
       }
 
     def notSupportedCollection(
-      field: CreateChatCompletionSettings => Traversable[_],
+      field: CreateChatCompletionSettings => Traversable[?],
       fieldName: String
     ): Unit =
       if (field(settings).nonEmpty) {

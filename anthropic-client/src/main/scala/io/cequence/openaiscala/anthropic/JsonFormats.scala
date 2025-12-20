@@ -177,9 +177,9 @@ trait JsonFormats {
 
     val writes: OWrites[Citation] = OWrites {
       case c: Citation.DocumentCitation =>
-        Json.toJsObject(c)(documentCitationFormat)
+        Json.toJsObject(c)(using documentCitationFormat)
       case c: Citation.WebSearchResultLocation =>
-        Json.toJsObject(c)(webSearchResultLocationFormat)
+        Json.toJsObject(c)(using webSearchResultLocationFormat)
     }
 
     OFormat(reads, writes)
@@ -258,9 +258,9 @@ trait JsonFormats {
 
   implicit lazy val webSearchToolResultContentWrites: Writes[WebSearchToolResultContent] = {
     case WebSearchToolResultContent.Success(results) =>
-      Json.toJson(results)(Writes.seq(webSearchToolResultBlockContentFormat))
+      Json.toJson(results)(using Writes.seq(using webSearchToolResultBlockContentFormat))
     case error: WebSearchToolResultContent.Error =>
-      Json.toJson(error)(webSearchToolResultErrorFormat)
+      Json.toJson(error)(using webSearchToolResultErrorFormat)
   }
 
   implicit lazy val webSearchToolResultContentFormat: Format[WebSearchToolResultContent] =
@@ -311,9 +311,9 @@ trait JsonFormats {
 
   implicit lazy val webFetchToolResultContentWrites: Writes[WebFetchToolResultContent] = {
     case success: WebFetchToolResultContent.Success =>
-      Json.toJson(success)(webFetchSuccessFormat)
+      Json.toJson(success)(using webFetchSuccessFormat)
     case error: WebFetchToolResultContent.Error =>
-      Json.toJson(error)(webFetchErrorFormat)
+      Json.toJson(error)(using webFetchErrorFormat)
   }
 
   implicit lazy val webFetchToolResultContentFormat: Format[WebFetchToolResultContent] =
@@ -351,7 +351,7 @@ trait JsonFormats {
   implicit lazy val mcpToolResultContentWrites: Writes[McpToolResultContent] = {
     case McpToolResultString(value) => JsString(value)
     case McpToolResultStructured(results) =>
-      Json.toJson(results)(Writes.seq(toolResultContentFormat))
+      Json.toJson(results)(using Writes.seq(using toolResultContentFormat))
   }
 
   implicit lazy val mcpToolResultContentFormat: Format[McpToolResultContent] =
@@ -389,10 +389,10 @@ trait JsonFormats {
     : Reads[CodeExecutionToolResultContent] = (json: JsValue) =>
     (json \ "type").validate[String].flatMap {
       case "code_execution_tool_result_error" =>
-        json.validate[CodeExecutionToolResultContent.Error](codeExecutionToolErrorFormat)
+        json.validate[CodeExecutionToolResultContent.Error](using codeExecutionToolErrorFormat)
 
       case "code_execution_result" =>
-        json.validate[CodeExecutionToolResultContent.Success](codeExecutionToolResultFormat)
+        json.validate[CodeExecutionToolResultContent.Success](using codeExecutionToolResultFormat)
       case other =>
         JsError(s"Unknown code execution tool result content type: $other")
     }
@@ -400,10 +400,10 @@ trait JsonFormats {
   implicit lazy val codeExecutionToolResultContentWrites
     : OWrites[CodeExecutionToolResultContent] = {
     case error: CodeExecutionToolResultContent.Error =>
-      Json.toJsObject(error)(codeExecutionToolErrorFormat)
+      Json.toJsObject(error)(using codeExecutionToolErrorFormat)
 
     case result: CodeExecutionToolResultContent.Success =>
-      Json.toJsObject(result)(codeExecutionToolResultFormat)
+      Json.toJsObject(result)(using codeExecutionToolResultFormat)
   }
 
   implicit lazy val codeExecutionToolResultContentFormat
@@ -445,10 +445,10 @@ trait JsonFormats {
     (json \ "type").validate[String].flatMap {
       case "bash_code_execution_tool_result_error" =>
         json
-          .validate[BashCodeExecutionToolResultContent.Error](bashCodeExecutionToolErrorFormat)
+          .validate[BashCodeExecutionToolResultContent.Error](using bashCodeExecutionToolErrorFormat)
       case "bash_code_execution_result" =>
         json.validate[BashCodeExecutionToolResultContent.Success](
-          bashCodeExecutionToolResultFormat
+          using bashCodeExecutionToolResultFormat
         )
       case other =>
         JsError(s"Unknown bash code execution tool result content type: $other")
@@ -457,9 +457,9 @@ trait JsonFormats {
   implicit lazy val bashCodeExecutionToolResultContentWrites
     : OWrites[BashCodeExecutionToolResultContent] = {
     case error: BashCodeExecutionToolResultContent.Error =>
-      Json.toJsObject(error)(bashCodeExecutionToolErrorFormat)
+      Json.toJsObject(error)(using bashCodeExecutionToolErrorFormat)
     case result: BashCodeExecutionToolResultContent.Success =>
-      Json.toJsObject(result)(bashCodeExecutionToolResultFormat)
+      Json.toJsObject(result)(using bashCodeExecutionToolResultFormat)
   }
 
   implicit lazy val bashCodeExecutionToolResultContentFormat
@@ -522,19 +522,19 @@ trait JsonFormats {
     (json \ "type").validate[String].flatMap {
       case "text_editor_code_execution_tool_result_error" =>
         json.validate[TextEditorCodeExecutionToolResultContent.Error](
-          textEditorCodeExecutionToolErrorFormat
+          using textEditorCodeExecutionToolErrorFormat
         )
       case "text_editor_code_execution_view_result" =>
         json.validate[TextEditorCodeExecutionToolResultContent.ViewResult](
-          textEditorCodeExecutionViewResultFormat
+          using textEditorCodeExecutionViewResultFormat
         )
       case "text_editor_code_execution_create_result" =>
         json.validate[TextEditorCodeExecutionToolResultContent.CreateResult](
-          textEditorCodeExecutionCreateResultFormat
+          using textEditorCodeExecutionCreateResultFormat
         )
       case "text_editor_code_execution_str_replace_result" =>
         json.validate[TextEditorCodeExecutionToolResultContent.ReplaceResult](
-          textEditorCodeExecutionReplaceResultFormat
+          using textEditorCodeExecutionReplaceResultFormat
         )
       case other =>
         JsError(s"Unknown text editor code execution tool result content type: $other")
@@ -543,13 +543,13 @@ trait JsonFormats {
   implicit lazy val textEditorCodeExecutionToolResultContentWrites
     : OWrites[TextEditorCodeExecutionToolResultContent] = OWrites {
     case x: TextEditorCodeExecutionToolResultContent.Error =>
-      Json.toJsObject(x)(textEditorCodeExecutionToolErrorFormat)
+      Json.toJsObject(x)(using textEditorCodeExecutionToolErrorFormat)
     case x: TextEditorCodeExecutionToolResultContent.ViewResult =>
-      Json.toJsObject(x)(textEditorCodeExecutionViewResultFormat)
+      Json.toJsObject(x)(using textEditorCodeExecutionViewResultFormat)
     case x: TextEditorCodeExecutionToolResultContent.CreateResult =>
-      Json.toJsObject(x)(textEditorCodeExecutionCreateResultFormat)
+      Json.toJsObject(x)(using textEditorCodeExecutionCreateResultFormat)
     case x: TextEditorCodeExecutionToolResultContent.ReplaceResult =>
-      Json.toJsObject(x)(textEditorCodeExecutionReplaceResultFormat)
+      Json.toJsObject(x)(using textEditorCodeExecutionReplaceResultFormat)
   }
 
   implicit lazy val textEditorCodeExecutionToolResultContentFormat
@@ -573,48 +573,48 @@ trait JsonFormats {
   private val contentBlockReads: Reads[ContentBlock] = (json: JsValue) =>
     (json \ "type").validate[String].flatMap {
       case "text" =>
-        json.validate[TextBlock](textBlockFormat)
+        json.validate[TextBlock](using textBlockFormat)
 
       case "thinking" =>
-        json.validate[ThinkingBlock](thinkingBlockFormat)
+        json.validate[ThinkingBlock](using thinkingBlockFormat)
 
       case "redacted_thinking" =>
-        json.validate[RedactedThinkingBlock](redactedThinkingBlockFormat)
+        json.validate[RedactedThinkingBlock](using redactedThinkingBlockFormat)
 
       case "tool_use" =>
-        json.validate[ToolUseBlock](toolUseBlockFormat)
+        json.validate[ToolUseBlock](using toolUseBlockFormat)
 
       case "server_tool_use" =>
-        json.validate[ServerToolUseBlock](serverToolUseBlockFormat)
+        json.validate[ServerToolUseBlock](using serverToolUseBlockFormat)
 
       case "web_search_tool_result" =>
-        json.validate[WebSearchToolResultBlock](webSearchToolResultBlockFormat)
+        json.validate[WebSearchToolResultBlock](using webSearchToolResultBlockFormat)
 
       case "web_fetch_tool_result" =>
-        json.validate[WebFetchToolResultBlock](webFetchToolResultBlockFormat)
+        json.validate[WebFetchToolResultBlock](using webFetchToolResultBlockFormat)
 
       case "mcp_tool_use" =>
-        json.validate[McpToolUseBlock](mcpToolUseBlockFormat)
+        json.validate[McpToolUseBlock](using mcpToolUseBlockFormat)
 
       case "mcp_tool_result" =>
-        json.validate[McpToolResultBlock](mcpToolResultBlockFormat)
+        json.validate[McpToolResultBlock](using mcpToolResultBlockFormat)
 
       case "container_upload" =>
-        json.validate[ContainerUploadBlock](containerUploadBlockFormat)
+        json.validate[ContainerUploadBlock](using containerUploadBlockFormat)
 
       case "code_execution_tool_result" =>
-        json.validate[CodeExecutionToolResultBlock](codeExecutionToolResultBlockFormat)
+        json.validate[CodeExecutionToolResultBlock](using codeExecutionToolResultBlockFormat)
 
       case "bash_code_execution_tool_result" =>
-        json.validate[BashCodeExecutionToolResultBlock](bashCodeExecutionToolResultBlockFormat)
+        json.validate[BashCodeExecutionToolResultBlock](using bashCodeExecutionToolResultBlockFormat)
 
       case "text_editor_code_execution_tool_result" =>
         json.validate[TextEditorCodeExecutionToolResultBlock](
-          textEditorCodeExecutionToolResultBlockFormat
+          using textEditorCodeExecutionToolResultBlockFormat
         )
 
       case imageOrDocumentType @ ("image" | "document") =>
-        json.validate[SourceContentBlockRaw](sourceContentBlockRawFormat).map {
+        json.validate[SourceContentBlockRaw](using sourceContentBlockRawFormat).map {
           sourceContentBlockRaw =>
             sourceContentBlockRaw.source match {
               case SourceBlockRaw("content", _, _, Some(textContents), _) =>
@@ -656,43 +656,43 @@ trait JsonFormats {
 
   private val contentBlockWrites: OWrites[ContentBlock] = {
     case x: TextBlock =>
-      Json.toJsObject(x)(textBlockFormat)
+      Json.toJsObject(x)(using textBlockFormat)
 
     case x: ThinkingBlock =>
-      Json.toJsObject(x)(thinkingBlockFormat)
+      Json.toJsObject(x)(using thinkingBlockFormat)
 
     case x: RedactedThinkingBlock =>
-      Json.toJsObject(x)(redactedThinkingBlockFormat)
+      Json.toJsObject(x)(using redactedThinkingBlockFormat)
 
     case x: ToolUseBlock =>
-      Json.toJsObject(x)(toolUseBlockFormat)
+      Json.toJsObject(x)(using toolUseBlockFormat)
 
     case x: ServerToolUseBlock =>
-      Json.toJsObject(x)(serverToolUseBlockFormat)
+      Json.toJsObject(x)(using serverToolUseBlockFormat)
 
     case x: WebSearchToolResultBlock =>
-      Json.toJsObject(x)(webSearchToolResultBlockFormat)
+      Json.toJsObject(x)(using webSearchToolResultBlockFormat)
 
     case x: WebFetchToolResultBlock =>
-      Json.toJsObject(x)(webFetchToolResultBlockFormat)
+      Json.toJsObject(x)(using webFetchToolResultBlockFormat)
 
     case x: McpToolUseBlock =>
-      Json.toJsObject(x)(mcpToolUseBlockFormat)
+      Json.toJsObject(x)(using mcpToolUseBlockFormat)
 
     case x: McpToolResultBlock =>
-      Json.toJsObject(x)(mcpToolResultBlockFormat)
+      Json.toJsObject(x)(using mcpToolResultBlockFormat)
 
     case x: ContainerUploadBlock =>
-      Json.toJsObject(x)(containerUploadBlockFormat)
+      Json.toJsObject(x)(using containerUploadBlockFormat)
 
     case x: CodeExecutionToolResultBlock =>
-      Json.toJsObject(x)(codeExecutionToolResultBlockFormat)
+      Json.toJsObject(x)(using codeExecutionToolResultBlockFormat)
 
     case x: BashCodeExecutionToolResultBlock =>
-      Json.toJsObject(x)(bashCodeExecutionToolResultBlockFormat)
+      Json.toJsObject(x)(using bashCodeExecutionToolResultBlockFormat)
 
     case x: TextEditorCodeExecutionToolResultBlock =>
-      Json.toJsObject(x)(textEditorCodeExecutionToolResultBlockFormat)
+      Json.toJsObject(x)(using textEditorCodeExecutionToolResultBlockFormat)
 
     case x: MediaBlock =>
       Json.toJsObject(
@@ -706,7 +706,7 @@ trait JsonFormats {
           context = x.context,
           citations = if (x.citations.getOrElse(false)) Some(CitationsFlag(true)) else None
         )
-      )(sourceContentBlockRawFormat)
+      )(using sourceContentBlockRawFormat)
 
     case x: TextsContentBlock =>
       Json.toJsObject(
@@ -723,7 +723,7 @@ trait JsonFormats {
           context = x.context,
           citations = if (x.citations.getOrElse(false)) Some(CitationsFlag(true)) else None
         )
-      )(sourceContentBlockRawFormat)
+      )(using sourceContentBlockRawFormat)
 
     case x: FileDocumentContentBlock =>
       Json.toJsObject(
@@ -736,7 +736,7 @@ trait JsonFormats {
           context = x.context,
           citations = if (x.citations.getOrElse(false)) Some(CitationsFlag(true)) else None
         )
-      )(sourceContentBlockRawFormat)
+      )(using sourceContentBlockRawFormat)
   }
 
   implicit val contentBlockFormat: OFormat[ContentBlock] =
@@ -744,7 +744,7 @@ trait JsonFormats {
 
   implicit lazy val contentBlockBaseWrites: OWrites[ContentBlockBase] = {
     case ContentBlockBase(content, cacheControl) =>
-      val jsonObject = Json.toJsObject(content)(contentBlockFormat)
+      val jsonObject = Json.toJsObject(content)(using contentBlockFormat)
       jsonObject ++ cacheControlToJsObject(cacheControl)
   }
 
@@ -760,8 +760,8 @@ trait JsonFormats {
     contentBlockBaseWrites
   )
   implicit lazy val contentBlockBaseSeqFormat: Format[Seq[ContentBlockBase]] = Format(
-    Reads.seq(contentBlockBaseReads),
-    Writes.seq(contentBlockBaseWrites)
+    Reads.seq(using contentBlockBaseReads),
+    Writes.seq(using contentBlockBaseWrites)
   )
 
   implicit lazy val userMessageFormat: Format[UserMessage] = Json.format[UserMessage]
@@ -788,7 +788,7 @@ trait JsonFormats {
       case SingleString(text, cacheControl) =>
         Json.obj("content" -> text) ++ cacheControlToJsObject(cacheControl)
       case ContentBlocks(blocks) =>
-        Json.obj("content" -> Json.toJson(blocks)(Writes.seq(contentBlockBaseWrites)))
+        Json.obj("content" -> Json.toJson(blocks)(using Writes.seq(using contentBlockBaseWrites)))
     }
   }
 
@@ -800,7 +800,7 @@ trait JsonFormats {
     case UserMessageContent(content) =>
       Json.obj(
         "role" -> "user",
-        "content" -> content.map(Json.toJson(_)(contentBlockBaseWrites))
+        "content" -> content.map(Json.toJson(_)(using contentBlockBaseWrites))
       )
 
     case AssistantMessage(content, cacheControl) =>
@@ -810,7 +810,7 @@ trait JsonFormats {
     case AssistantMessageContent(content) =>
       Json.obj(
         "role" -> "assistant",
-        "content" -> content.map(Json.toJson(_)(contentBlockBaseWrites))
+        "content" -> content.map(Json.toJson(_)(using contentBlockBaseWrites))
       )
     // Add cases for other subclasses if necessary
   }
@@ -851,7 +851,7 @@ trait JsonFormats {
       (__ \ "stop_reason").readNullable[String] and
       (__ \ "stop_sequence").readNullable[String] and
       (__ \ "usage").read[UsageInfo]
-  )(CreateMessageResponse.apply _)
+  )(CreateMessageResponse.apply)
 
   implicit lazy val createMessageChunkResponseReads: Reads[CreateMessageChunkResponse] =
     Json.reads[CreateMessageChunkResponse]
@@ -863,13 +863,13 @@ trait JsonFormats {
   private val deltaBlockReads: Reads[DeltaBlock] = (json: JsValue) =>
     (json \ "type").validate[String].flatMap {
       case "text_delta" =>
-        json.validate[DeltaText](deltaTextFormat)
+        json.validate[DeltaText](using deltaTextFormat)
 
       case "thinking_delta" =>
-        json.validate[DeltaThinking](deltaThinkingFormat)
+        json.validate[DeltaThinking](using deltaThinkingFormat)
 
       case "signature_delta" =>
-        json.validate[DeltaSignature](deltaSignatureFormat)
+        json.validate[DeltaSignature](using deltaSignatureFormat)
 
       case _ =>
         JsError("Unsupported or invalid delta block type")
@@ -877,13 +877,13 @@ trait JsonFormats {
 
   private val deltaBlockWrites: OWrites[DeltaBlock] = {
     case deltaText: DeltaText =>
-      Json.toJsObject(deltaText)(deltaTextFormat)
+      Json.toJsObject(deltaText)(using deltaTextFormat)
 
     case deltaThinking: DeltaThinking =>
-      Json.toJsObject(deltaThinking)(deltaThinkingFormat)
+      Json.toJsObject(deltaThinking)(using deltaThinkingFormat)
 
     case deltaSignature: DeltaSignature =>
-      Json.toJsObject(deltaSignature)(deltaSignatureFormat)
+      Json.toJsObject(deltaSignature)(using deltaSignatureFormat)
   }
 
   implicit lazy val deltaBlockFormat: Format[DeltaBlock] =
@@ -1083,14 +1083,14 @@ trait JsonFormats {
 
   implicit lazy val toolWrites: OWrites[Tool] = (tool: Tool) => {
     val jsonObject: JsObject = tool match {
-      case t: CustomTool        => Json.toJsObject(t)(customToolFormat)
-      case t: BashTool          => Json.toJsObject(t)(bashToolFormat)
-      case t: CodeExecutionTool => Json.toJsObject(t)(codeExecutionToolFormat)
-      case t: ComputerUseTool   => Json.toJsObject(t)(computerUseToolFormat)
-      case t: MemoryTool        => Json.toJsObject(t)(memoryToolFormat)
-      case t: TextEditorTool    => Json.toJsObject(t)(textEditorToolFormat)
-      case t: WebSearchTool     => Json.toJsObject(t)(webSearchToolFormat)
-      case t: WebFetchTool      => Json.toJsObject(t)(webFetchToolFormat)
+      case t: CustomTool        => Json.toJsObject(t)(using customToolFormat)
+      case t: BashTool          => Json.toJsObject(t)(using bashToolFormat)
+      case t: CodeExecutionTool => Json.toJsObject(t)(using codeExecutionToolFormat)
+      case t: ComputerUseTool   => Json.toJsObject(t)(using computerUseToolFormat)
+      case t: MemoryTool        => Json.toJsObject(t)(using memoryToolFormat)
+      case t: TextEditorTool    => Json.toJsObject(t)(using textEditorToolFormat)
+      case t: WebSearchTool     => Json.toJsObject(t)(using webSearchToolFormat)
+      case t: WebFetchTool      => Json.toJsObject(t)(using webFetchToolFormat)
     }
 
     // Centrally add name and type fields for all tools
@@ -1106,29 +1106,29 @@ trait JsonFormats {
 
     (toolType, toolName) match {
       case (Some("custom"), _) | (None, _) =>
-        json.validate[CustomTool](customToolFormat)
+        json.validate[CustomTool](using customToolFormat)
 
       case (Some(t), Some("bash")) if t.startsWith("bash_") =>
-        json.validate[BashTool](bashToolFormat)
+        json.validate[BashTool](using bashToolFormat)
 
       case (Some(t), Some("code_execution")) if t.startsWith("code_execution_") =>
-        json.validate[CodeExecutionTool](codeExecutionToolFormat)
+        json.validate[CodeExecutionTool](using codeExecutionToolFormat)
 
       case (Some(t), Some("computer")) if t.startsWith("computer_") =>
-        json.validate[ComputerUseTool](computerUseToolFormat)
+        json.validate[ComputerUseTool](using computerUseToolFormat)
 
       case (Some("memory_20250818"), Some("memory")) =>
-        json.validate[MemoryTool](memoryToolFormat)
+        json.validate[MemoryTool](using memoryToolFormat)
 
       case (Some(t), Some("str_replace_editor" | "str_replace_based_edit_tool"))
           if t.startsWith("text_editor_") =>
-        json.validate[TextEditorTool](textEditorToolFormat)
+        json.validate[TextEditorTool](using textEditorToolFormat)
 
       case (Some("web_search_20250305"), Some("web_search")) =>
-        json.validate[WebSearchTool](webSearchToolFormat)
+        json.validate[WebSearchTool](using webSearchToolFormat)
 
       case (Some("web_fetch_20250910"), Some("web_fetch")) =>
-        json.validate[WebFetchTool](webFetchToolFormat)
+        json.validate[WebFetchTool](using webFetchToolFormat)
 
       case _ =>
         JsError(s"Unknown tool type: $toolType with name: $toolName")
@@ -1174,7 +1174,7 @@ trait JsonFormats {
 
     val jsonSchemaFormatWrites: OWrites[OutputFormat.JsonSchemaFormat] = OWrites { format =>
       Json.obj(
-        "schema" -> Json.toJson(format.schema)(jsonSchemaFormat)
+        "schema" -> Json.toJson(format.schema)(using jsonSchemaFormat)
       )
     }
 

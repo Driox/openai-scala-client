@@ -105,7 +105,7 @@ trait ChatCompletionBodyMaker {
       else
         messagesAux
 
-    val messageJsons = messagesFinal.map(Json.toJson(_)(messageWrites))
+    val messageJsons = messagesFinal.map(Json.toJson(_)(using messageWrites))
 
     // revisit this later
     val settingsFinal =

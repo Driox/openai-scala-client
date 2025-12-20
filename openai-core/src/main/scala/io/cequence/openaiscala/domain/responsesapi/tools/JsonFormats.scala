@@ -81,7 +81,7 @@ object JsonFormats {
         (__ \ "max_num_results").formatNullable[Int] and
         (__ \ "ranking_options").formatNullable[FileSearchRankingOptions]
     )(
-      FileSearchTool.apply _,
+      FileSearchTool.apply,
       (x: FileSearchTool) => (x.vectorStoreIds, x.filters, x.maxNumResults, x.rankingOptions)
     )
 
@@ -366,23 +366,23 @@ object JsonFormats {
         JsString(mode.toString)
 
       case at: ToolChoice.AllowedTools =>
-        Json.toJsObject(at)(toolChoiceAllowedToolsFormat) ++
+        Json.toJsObject(at)(using toolChoiceAllowedToolsFormat) ++
           Json.obj("type" -> "allowed_tools")
 
       case ft: ToolChoice.FunctionTool =>
-        Json.toJsObject(ft)(toolChoiceFunctionToolFormat) ++
+        Json.toJsObject(ft)(using toolChoiceFunctionToolFormat) ++
           Json.obj("type" -> "function")
 
       case mt: ToolChoice.MCPTool =>
-        Json.toJsObject(mt)(toolChoiceMCPToolFormat) ++
+        Json.toJsObject(mt)(using toolChoiceMCPToolFormat) ++
           Json.obj("type" -> "mcp")
 
       case ct: ToolChoice.CustomTool =>
-        Json.toJsObject(ct)(toolChoiceCustomToolFormat) ++
+        Json.toJsObject(ct)(using toolChoiceCustomToolFormat) ++
           Json.obj("type" -> "custom")
 
       case ht: ToolChoice.HostedTool =>
-        Json.toJsObject(ht)(hostedToolFormat)
+        Json.toJsObject(ht)(using hostedToolFormat)
     }
   }
 
@@ -461,7 +461,7 @@ object JsonFormats {
         (__ \ "score").formatNullable[Double] and
         (__ \ "text").formatNullable[String]
     )(
-      FileSearchResult.apply _,
+      FileSearchResult.apply,
       // somehow FileSearchResult.unapply is not working in Scala3
       (x: FileSearchResult) =>
         (
@@ -498,7 +498,7 @@ object JsonFormats {
       (__ \ "query").formatNullable[String] and
         (__ \ "sources").formatWithDefault[Seq[WebSearchSource]](Seq.empty[WebSearchSource])
     )(
-      WebSearchAction.Search.apply _,
+      WebSearchAction.Search.apply,
       (x: WebSearchAction.Search) => (x.query, x.sources)
     )
   private implicit lazy val webSearchActionOpenPageFormat: OFormat[WebSearchAction.OpenPage] =
@@ -534,7 +534,7 @@ object JsonFormats {
         (__ \ "id").format[String] and
         (__ \ "status").format[ModelStatus]
     )(
-      WebSearchToolCall.apply _,
+      WebSearchToolCall.apply,
       (x: WebSearchToolCall) => (x.action, x.id, x.status)
     )
   implicit lazy val computerToolCallFormat: OFormat[ComputerToolCall] =
@@ -546,7 +546,7 @@ object JsonFormats {
           .formatWithDefault[Seq[PendingSafetyCheck]](Seq.empty[PendingSafetyCheck]) and
         (__ \ "status").format[ModelStatus]
     )(
-      ComputerToolCall.apply _,
+      ComputerToolCall.apply,
       (x: ComputerToolCall) => (x.action, x.callId, x.id, x.pendingSafetyChecks, x.status)
     )
 
@@ -557,7 +557,7 @@ object JsonFormats {
         (__ \ "status").format[ModelStatus] and
         (__ \ "results").formatWithDefault[Seq[FileSearchResult]](Seq.empty[FileSearchResult])
     )(
-      FileSearchToolCall.apply _,
+      FileSearchToolCall.apply,
       (x: FileSearchToolCall) => (x.id, x.queries, x.status, x.results)
     )
 
@@ -636,8 +636,8 @@ object JsonFormats {
           case arr: JsArray =>
             arr
               .validate[Seq[InputMessageContent]](
-                Reads.seq(
-                  io.cequence.openaiscala.domain.responsesapi.JsonFormats.inputMessageContentFormat
+                using Reads.seq(
+                  using io.cequence.openaiscala.domain.responsesapi.JsonFormats.inputMessageContentFormat
                 )
               )
               .map(content => FunctionToolOutput.ContentOutput(content))
@@ -651,8 +651,8 @@ object JsonFormats {
           JsString(value)
         case FunctionToolOutput.ContentOutput(content) =>
           Json.toJson(content)(
-            Writes.seq(
-              io.cequence.openaiscala.domain.responsesapi.JsonFormats.inputMessageContentFormat
+            using Writes.seq(
+              using io.cequence.openaiscala.domain.responsesapi.JsonFormats.inputMessageContentFormat
             )
           )
       }
@@ -693,7 +693,7 @@ object JsonFormats {
         (__ \ "id").formatNullable[String] and
         (__ \ "status").formatNullable[ModelStatus]
     )(
-      ComputerToolCallOutput.apply _,
+      ComputerToolCallOutput.apply,
       (x: ComputerToolCallOutput) =>
         (x.callId, x.output, x.acknowledgedSafetyChecks, x.id, x.status)
     )

@@ -78,7 +78,7 @@ object CreateRunWithFunctionCall extends Example {
       functionCalls = toolCalls.collect {
         case toolCall if toolCall.function.isInstanceOf[FunctionCallSpec] => toolCall
       }
-      available_functions = Map("get_current_weather" -> getCurrentWeather _)
+      available_functions = Map("get_current_weather" -> getCurrentWeather)
 
       toolMessages = functionCalls.map { toolCall =>
         val functionCallSpec = toolCall.function

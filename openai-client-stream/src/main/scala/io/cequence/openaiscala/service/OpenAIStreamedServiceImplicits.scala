@@ -92,7 +92,7 @@ object OpenAIStreamedServiceImplicits {
   ) {
     def withStreaming(
       streamedExtra: OpenAIChatCompletionStreamedServiceExtra
-    ): OpenAICoreService with OpenAIChatCompletionStreamedServiceExtra =
+    ): OpenAICoreService & OpenAIChatCompletionStreamedServiceExtra =
       new OpenAICoreStreamedServiceWrapper(
         service,
         streamedExtra
@@ -133,7 +133,7 @@ object OpenAIStreamedServiceImplicits {
   ) {
     def withStreaming(
       streamedExtra: OpenAIChatCompletionStreamedServiceExtra
-    ): OpenAIService with OpenAIChatCompletionStreamedServiceExtra =
+    ): OpenAIService & OpenAIChatCompletionStreamedServiceExtra =
       new OpenAIStreamedServiceWrapper(
         service,
         streamedExtra

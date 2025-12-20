@@ -23,5 +23,5 @@ trait DelegatedChatCompletionCloseableServiceWrapper[+S <: CloseableService]
 
 object ServiceWrapperTypes {
   type ChatCompletionCloseableServiceWrapper[+S] = CloseableServiceWrapper[S]
-    with OpenAIChatCompletionService
+    & OpenAIChatCompletionService
 }

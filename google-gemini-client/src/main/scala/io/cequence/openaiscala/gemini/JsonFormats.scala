@@ -352,7 +352,7 @@ trait JsonFormats {
       (__ \ "avgLogprobs").readNullable[Double] and
       (__ \ "logprobsResult").lazyReadNullable[LogprobsResult](logprobsResultReads) and
       (__ \ "index").readNullable[Int]
-  )(Candidate.apply _)
+  )(Candidate.apply)
 
   implicit lazy val candidateFormat: Format[Candidate] =
     Format(candidateReads, candidateWrites)
@@ -372,7 +372,7 @@ trait JsonFormats {
   implicit lazy val logprobsResultReads: Reads[LogprobsResult] = (
     (__ \ "topCandidates").readWithDefault[Seq[TopCandidates]](Nil) and
       (__ \ "chosenCandidates").readWithDefault[Seq[Candidate]](Nil)
-  )(LogprobsResult.apply _)
+  )(LogprobsResult.apply)
 
   implicit lazy val logprobsResultFormat: Format[LogprobsResult] =
     Format(logprobsResultReads, logprobsResultWrites)
@@ -382,7 +382,7 @@ trait JsonFormats {
   implicit val promptFeedbackReads: Reads[PromptFeedback] = (
     (__ \ "blockReason").readNullable[BlockReason] and
       (__ \ "safetyRatings").readWithDefault[Seq[SafetyRating]](Nil)
-  )(PromptFeedback.apply _)
+  )(PromptFeedback.apply)
 
   implicit val promptFeedbackWrites: Writes[PromptFeedback] = (
     (__ \ "blockReason").writeNullable[BlockReason] and

@@ -116,7 +116,7 @@ object JsonFormats {
           case JsString(text) => JsSuccess(GraderInputContent.TextString(text))
           case arr: JsArray =>
             arr
-              .validate[Seq[GraderInputContent]](Reads.seq(graderInputContentFormat))
+              .validate[Seq[GraderInputContent]](using Reads.seq(using graderInputContentFormat))
               .map(items => GraderInputContent.ContentArray(items))
           case obj: JsObject =>
             (obj \ "type").validate[String].flatMap {

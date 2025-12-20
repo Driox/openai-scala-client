@@ -135,7 +135,7 @@ object AnthropicServiceFactory extends AnthropicServiceConsts with EnvHelper {
     val materializer: Materializer
   ) extends AnthropicServiceImpl {
     // Play WS engine
-    override protected val engine: WSClientEngine with WSClientEngineStreamExtra =
+    override protected val engine: WSClientEngine & WSClientEngineStreamExtra =
       PlayWSStreamClientEngine(
         coreUrl,
         WsRequestContext(authHeaders = authHeaders, explTimeouts = explTimeouts),
@@ -152,7 +152,7 @@ object AnthropicServiceFactory extends AnthropicServiceConsts with EnvHelper {
   ) extends AnthropicBedrockServiceImpl {
 
     // Play WS engine
-    override protected val engine: WSClientEngine with WSClientEngineStreamExtra =
+    override protected val engine: WSClientEngine & WSClientEngineStreamExtra =
       PlayWSStreamClientEngine(
         coreUrl = bedrockCoreUrl(connectionInfo.region),
         WsRequestContext(explTimeouts = explTimeouts),

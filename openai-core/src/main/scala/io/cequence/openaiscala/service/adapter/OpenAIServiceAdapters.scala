@@ -39,7 +39,7 @@ trait OpenAIServiceAdapters[S <: CloseableService] extends ServiceAdapters[S] {
     adaptMessages: Seq[BaseMessage] => Seq[BaseMessage],
     adaptSettings: CreateChatCompletionSettings => CreateChatCompletionSettings
   )(
-    service: S with OpenAIChatCompletionService
+    service: S & OpenAIChatCompletionService
   ): S =
     wrapAndDelegateChatCompletion(
       new ChatCompletionInputAdapter(adaptMessages, adaptSettings)(service)
@@ -48,7 +48,7 @@ trait OpenAIServiceAdapters[S <: CloseableService] extends ServiceAdapters[S] {
   def chatCompletionOutput(
     adaptMessage: AssistantMessage => AssistantMessage
   )(
-    service: S with OpenAIChatCompletionService
+    service: S & OpenAIChatCompletionService
   )(
     implicit ec: ExecutionContext
   ): S =
@@ -61,7 +61,7 @@ trait OpenAIServiceAdapters[S <: CloseableService] extends ServiceAdapters[S] {
     adjustSettingsForCall: CreateChatCompletionSettings => CreateChatCompletionSettings =
       identity[CreateChatCompletionSettings]
   )(
-    service: S with OpenAIChatCompletionService
+    service: S & OpenAIChatCompletionService
   )(
     implicit ec: ExecutionContext
   ): S =
@@ -71,7 +71,7 @@ trait OpenAIServiceAdapters[S <: CloseableService] extends ServiceAdapters[S] {
 
   def chatCompletionRouter(
     serviceModels: Map[OpenAIChatCompletionService, Seq[String]],
-    service: S with OpenAIChatCompletionService
+    service: S & OpenAIChatCompletionService
   ): S = {
     val chatCompletionService =
       OpenAIChatCompletionServiceRouter(serviceModels, service)
@@ -82,7 +82,7 @@ trait OpenAIServiceAdapters[S <: CloseableService] extends ServiceAdapters[S] {
 
   def chatCompletionRouterMapped(
     serviceModels: Map[OpenAIChatCompletionService, Seq[MappedModel]],
-    service: S with OpenAIChatCompletionService
+    service: S & OpenAIChatCompletionService
   ): S = {
     val chatCompletionService =
       OpenAIChatCompletionServiceRouter.applyMapped(serviceModels, service)
@@ -92,7 +92,7 @@ trait OpenAIServiceAdapters[S <: CloseableService] extends ServiceAdapters[S] {
   }
 
   def chatToCompletion(
-    service: S with OpenAICompletionService with OpenAIChatCompletionService
+    service: S & OpenAICompletionService & OpenAIChatCompletionService
   )(
     implicit ec: ExecutionContext
   ): S =

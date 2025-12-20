@@ -28,9 +28,9 @@ object OpenAIChatCompletionIOConversionAdapter {
     implicit ec: ExecutionContext
   ): OpenAIChatCompletionStreamedService = {
     val inputMessagesConversionFinal =
-      inputMessagesConversion.getOrElse(identity[Seq[BaseMessage]] _)
+      inputMessagesConversion.getOrElse(identity[Seq[BaseMessage]])
     val inputSettingsConversionFinal =
-      inputSettingsConversion.getOrElse(identity[CreateChatCompletionSettings] _)
+      inputSettingsConversion.getOrElse(identity[CreateChatCompletionSettings])
 
     // input conversion
     val nonStreamedServiceAux =

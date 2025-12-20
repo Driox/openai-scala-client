@@ -12,31 +12,31 @@ object ReflectionUtil {
     private val typeSymbol = typeRepr.typeSymbol
 
     private val optionInnerType: Option[TypeRepr] =
-      if (typeRepr <:< TypeRepr.of[Option[_]])
+      if (typeRepr <:< TypeRepr.of[Option[?]])
         Some(typeRepr.typeArgs.head)
       else
         None
 
-    def matches(types: Type[_]*): Boolean =
+    def matches(types: Type[?]*): Boolean =
       types.exists { candidateType =>
         val candidateRepr = TypeRepr.of(using candidateType)
         typeRepr =:= candidateRepr || (optionInnerType.isDefined && optionInnerType.get =:= candidateRepr)
       }
 
-    def subMatches(types: Type[_]*): Boolean =
+    def subMatches(types: Type[?]*): Boolean =
       types.exists { candidateType =>
         val candidateRepr = TypeRepr.of(using candidateType)
         typeRepr <:< candidateRepr || (optionInnerType.isDefined && optionInnerType.get <:< candidateRepr)
       }
 
     def isOption(): Boolean =
-      typeRepr <:< TypeRepr.of[Option[_]]
+      typeRepr <:< TypeRepr.of[Option[?]]
 
     def isCaseClass(): Boolean = {
       typeSymbol.isClassDef && typeSymbol.flags.is(Flags.Case)
     }
 
-    def getCaseClassFields(): List[(String, Type[_])] = {
+    def getCaseClassFields(): List[(String, Type[?])] = {
       import q.reflect.*
 
       // Ensure it's a case class

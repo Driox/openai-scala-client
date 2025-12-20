@@ -22,7 +22,7 @@ import scala.concurrent.Future
  * but here we demonstrate how "routed" streaming can be added to the full OpenAI service.
  */
 object ChatCompletionStreamedRouterWithFullServiceExample
-    extends ExampleBase[OpenAIService with OpenAIChatCompletionStreamedServiceExtra] {
+    extends ExampleBase[OpenAIService & OpenAIChatCompletionStreamedServiceExtra] {
 
   // OctoML
   private val octoMLService = OpenAIChatCompletionStreamedServiceFactory(
@@ -57,7 +57,7 @@ object ChatCompletionStreamedRouterWithFullServiceExample
     )
 
   // now we create a new "full" OpenAI service and add the routed streaming to it
-  override val service: OpenAIService with OpenAIChatCompletionStreamedServiceExtra =
+  override val service: OpenAIService & OpenAIChatCompletionStreamedServiceExtra =
     OpenAIServiceFactory().withStreaming(routedStreamedService)
 
   val messages: Seq[BaseMessage] = Seq(

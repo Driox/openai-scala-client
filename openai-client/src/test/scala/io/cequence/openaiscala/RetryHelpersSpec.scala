@@ -105,8 +105,8 @@ class RetryHelpersSpec
     "compute the correct delay when using constant interval" in {
       val interval = 10.seconds
       val settings = RetrySettings(interval)
-      delay(1)(settings) shouldBe interval
-      delay(5)(settings) shouldBe interval
+      delay(1)(using settings) shouldBe interval
+      delay(5)(using settings) shouldBe interval
     }
 
     "compute the correct delay when using strictly positive base" in {
@@ -115,9 +115,9 @@ class RetryHelpersSpec
         delayOffset = 2.seconds,
         delayBase = 2
       )
-      delay(1)(settings) shouldBe 4.seconds
-      delay(2)(settings) shouldBe 6.seconds
-      delay(3)(settings) shouldBe 10.seconds
+      delay(1)(using settings) shouldBe 4.seconds
+      delay(2)(using settings) shouldBe 6.seconds
+      delay(3)(using settings) shouldBe 10.seconds
     }
 
   }

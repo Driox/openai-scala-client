@@ -28,7 +28,7 @@ object OpenAIChatCompletionStreamedServiceFactory
     val materializer: Materializer
   ) extends OpenAIChatCompletionServiceStreamedExtraImpl {
     // Play WS engine
-    override protected val engine: WSClientEngine with WSClientEngineStreamExtra =
+    override protected val engine: WSClientEngine & WSClientEngineStreamExtra =
       PlayWSStreamClientEngine(coreUrl, requestContext)
   }
 }
