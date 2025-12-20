@@ -1,11 +1,10 @@
 import sbt.Keys.test
 
 // Supported versions
-val scala213 = "2.13.18"
-val scala3 = "3.2.2"
+val scala3 = "3.7.3"
 
 ThisBuild / organization := "io.cequence"
-ThisBuild / scalaVersion := scala213
+ThisBuild / scalaVersion := scala3
 ThisBuild / version := "1.3.0.RC.1"
 ThisBuild / isSnapshot := false
 
@@ -13,11 +12,10 @@ lazy val commonSettings = Seq(
   libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.16",
   libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test,
   libraryDependencies += "org.scalatestplus" %% "mockito-4-11" % "3.2.16.0" % Test,
-  libraryDependencies += "org.apache.pekko" %% "pekko-actor-testkit-typed" % "1.4.0" % Test,
-  crossScalaVersions := List(scala213, scala3)
+  libraryDependencies += "org.apache.pekko" %% "pekko-actor-testkit-typed" % "1.4.0" % Test
 )
 
-lazy val ws_client_git_deps = uri("https://github.com/Driox/open-ai-ws-client.git#0.7.3")
+lazy val ws_client_git_deps = uri("https://github.com/Driox/open-ai-ws-client.git#0.7.4")
 
 lazy val jsonRepair = ProjectRef(ws_client_git_deps, "json-repair")
 lazy val wsClientCore = ProjectRef(ws_client_git_deps, "ws-client-core")
