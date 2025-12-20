@@ -159,7 +159,7 @@ trait RetryHelpers {
         case Nil =>
           val lastExceptionActual = lastException.getOrElse(
             throw new OpenAIScalaClientException(
-              s"Should never happen. No last exception provided!"
+              "Should never happen. No last exception provided!"
             )
           )
 

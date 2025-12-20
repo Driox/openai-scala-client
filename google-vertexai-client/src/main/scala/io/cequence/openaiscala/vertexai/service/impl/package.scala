@@ -272,7 +272,7 @@ package object impl {
 
       case _ =>
         throw new OpenAIScalaClientException(
-          s"Unsupported JSON schema type for Google Vertex."
+          "Unsupported JSON schema type for Google Vertex."
         )
     }
 

@@ -169,7 +169,7 @@ trait OpenAICountTokensHelper {
   def countTokens(
     text: String,
     modelType: Option[ModelType] = None
-  ) = {
+  ): Int = {
     val encoding = registry.getEncodingForModel(modelType.getOrElse(ModelType.GPT_4O))
     encoding.countTokens(text)
   }

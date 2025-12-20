@@ -210,7 +210,7 @@ private[service] class OpenAIGeminiChatCompletionService(
       case AssistantMessage(content, _, _) =>
         Content(Seq(Part.Text(content)), Some(ChatRole.Model))
 
-      case _ => throw new OpenAIScalaClientException(s"Unsupported message type for Gemini.")
+      case _ => throw new OpenAIScalaClientException("Unsupported message type for Gemini.")
     }
 
   private def toGeminiSettings(
@@ -438,7 +438,7 @@ private[service] class OpenAIGeminiChatCompletionService(
       )
 
     case _ =>
-      throw new OpenAIScalaClientException(s"Unsupported JSON schema type for Gemini.")
+      throw new OpenAIScalaClientException("Unsupported JSON schema type for Gemini.")
   }
 
   private def toOpenAIResponse(
@@ -487,7 +487,7 @@ private[service] class OpenAIGeminiChatCompletionService(
         case Part.Text(text) => text
         case _ =>
           throw new OpenAIScalaClientException(
-            s"Unsupported assistant part type for Gemini. Implement me!"
+            "Unsupported assistant part type for Gemini. Implement me!"
           )
       }.mkString("\n")
     )
@@ -499,7 +499,7 @@ private[service] class OpenAIGeminiChatCompletionService(
       case Part.Text(text) => text
       case _ =>
         throw new OpenAIScalaClientException(
-          s"Unsupported assistant part type for Gemini. Implement me!"
+          "Unsupported assistant part type for Gemini. Implement me!"
         )
     }
 
