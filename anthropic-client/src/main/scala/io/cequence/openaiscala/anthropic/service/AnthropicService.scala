@@ -309,7 +309,7 @@ trait AnthropicService extends CloseableService with AnthropicServiceConsts {
    * @see
    *   <a href="https://docs.claude.com/en/api/files-content">Anthropic Files Doc</a>
    */
-  def downloadFile(fileId: String): Future[Option[Source[ByteString, _]]]
+  def downloadFile(fileId: String): Future[Option[Source[ByteString, ?]]]
 
   /**
    * Deletes a file.

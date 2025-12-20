@@ -42,7 +42,7 @@ object AnthropicCreateChatCompletionStreamedWithOpenAIAdapter
           _.choices.headOption.flatMap(_.delta.content).getOrElse("")
         )
 
-    val sourceWithRetry: Source[String, _] = RestartSource.onFailuresWithBackoff(
+    val sourceWithRetry: Source[String, ?] = RestartSource.onFailuresWithBackoff(
       minBackoff = 0.5.seconds,
       maxBackoff = 20.seconds,
       randomFactor = 0.2,

@@ -203,7 +203,7 @@ trait OpenAIServiceWrapper
   override def createAudioSpeech(
     input: String,
     settings: CreateSpeechSettings
-  ): Future[Source[ByteString, _]] = wrap(
+  ): Future[Source[ByteString, ?]] = wrap(
     _.createAudioSpeech(input, settings)
   )
 
@@ -280,7 +280,7 @@ trait OpenAIServiceWrapper
 
   override def retrieveFileContentAsSource(
     fileId: String
-  ): Future[Option[Source[ByteString, _]]] = wrap(
+  ): Future[Option[Source[ByteString, ?]]] = wrap(
     _.retrieveFileContentAsSource(fileId)
   )
 

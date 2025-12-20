@@ -240,7 +240,7 @@ trait OpenAIService
   def createAudioSpeech(
     input: String,
     settings: CreateSpeechSettings = DefaultSettings.CreateSpeech
-  ): Future[Source[ByteString, _]]
+  ): Future[Source[ByteString, ?]]
 
   /**
    * Transcribes audio into the input language.
@@ -456,7 +456,7 @@ trait OpenAIService
    */
   def retrieveFileContentAsSource(
     fileId: String
-  ): Future[Option[Source[ByteString, _]]]
+  ): Future[Option[Source[ByteString, ?]]]
 
   /**
    * Creates a job that fine-tunes a specified model from a given dataset. Response includes

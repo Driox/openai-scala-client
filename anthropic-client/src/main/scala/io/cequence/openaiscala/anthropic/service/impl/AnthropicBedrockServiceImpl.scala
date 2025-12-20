@@ -219,7 +219,7 @@ private[service] trait AnthropicBedrockServiceImpl extends Anthropic with Bedroc
       new UnsupportedOperationException("Files API is not supported in Anthropic Bedrock")
     )
 
-  override def downloadFile(fileId: String): Future[Option[Source[ByteString, _]]] =
+  override def downloadFile(fileId: String): Future[Option[Source[ByteString, ?]]] =
     Future.failed(
       new UnsupportedOperationException("Files API is not supported in Anthropic Bedrock")
     )

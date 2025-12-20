@@ -15,7 +15,7 @@ object FunctionCallOpenAISerializer {
         lines += s"// ${f.description.get}"
       }
       f.parameters.get("properties") match {
-        case Some(p: Map[_, _]) if p.nonEmpty =>
+        case Some(p: Map[_, ?]) if p.nonEmpty =>
           lines += s"type ${f.name} = (_: {"
           lines += formatObjectProperties(f.parameters, 0)
           lines += "}) => any;"

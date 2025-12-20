@@ -370,7 +370,7 @@ private[service] trait OpenAIServiceImpl
   def createAudioSpeech(
     input: String,
     settings: CreateSpeechSettings = DefaultSettings.CreateSpeech
-  ): Future[Source[ByteString, _]] =
+  ): Future[Source[ByteString, ?]] =
     execPOST(
       EndPoint.audio_speech,
       bodyParams = jsonBodyParams(
@@ -544,7 +544,7 @@ private[service] trait OpenAIServiceImpl
 
   override def retrieveFileContentAsSource(
     fileId: String
-  ): Future[Option[Source[ByteString, _]]] =
+  ): Future[Option[Source[ByteString, ?]]] =
     execGETRich(
       endPoint = EndPoint.files,
       endPointParam = Some(s"${fileId}/content")

@@ -67,13 +67,13 @@ trait JsonSchemaReflectionHelper {
         caseClassAsJsonSchema(t, mirror, dateAsNumber, explicitTypes)
 
       // map - TODO
-      case t if t subMatches (typeOf[Map[String, _]]) =>
+      case t if t subMatches (typeOf[Map[String, ?]]) =>
         throw new OpenAIScalaClientException(
           "JSON schema reflection doesn't support 'Map' type."
         )
 
       // either value - TODO
-      case t if t matches typeOf[Either[_, _]] =>
+      case t if t matches typeOf[Either[_, ?]] =>
         throw new OpenAIScalaClientException(
           "JSON schema reflection doesn't support 'Either' type."
         )

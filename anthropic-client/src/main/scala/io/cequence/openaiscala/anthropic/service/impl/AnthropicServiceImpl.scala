@@ -246,7 +246,7 @@ private[service] trait AnthropicServiceImpl extends Anthropic {
 
   override def downloadFile(
     fileId: String
-  ): Future[Option[Source[ByteString, _]]] = {
+  ): Future[Option[Source[ByteString, ?]]] = {
     execGETRich(
       EndPoint.files,
       Some(s"$fileId/content")
